@@ -17,9 +17,9 @@ public class ProjectAcademyLP3 {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        Person p1 = new Person("39958446855", "Kaleo Aparecido Piasse");
+        //Person p1 = new Person("39958446855", "Kaleo Aparecido Piasse");
         
-        System.out.println(p1);
+        //System.out.println(p1);
     }
     
 }

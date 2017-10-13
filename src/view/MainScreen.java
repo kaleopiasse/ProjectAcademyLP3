@@ -28,19 +28,42 @@ public class MainScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jMBar = new javax.swing.JMenuBar();
+        jmCadastros = new javax.swing.JMenu();
+        jmiAluno = new javax.swing.JMenuItem();
+        jmEsc = new javax.swing.JMenu();
+        jmiEsc = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(800, 600));
+        setSize(new java.awt.Dimension(800, 600));
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        jmCadastros.setText("Cadastros");
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        jmiAluno.setText("Aluno");
+        jmiAluno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiAlunoActionPerformed(evt);
+            }
+        });
+        jmCadastros.add(jmiAluno);
 
-        setJMenuBar(jMenuBar1);
+        jMBar.add(jmCadastros);
+
+        jmEsc.setText("Sair");
+
+        jmiEsc.setText("Sair do sistema");
+        jmiEsc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiEscActionPerformed(evt);
+            }
+        });
+        jmEsc.add(jmiEsc);
+
+        jMBar.add(jmEsc);
+
+        setJMenuBar(jMBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -55,6 +78,16 @@ public class MainScreen extends javax.swing.JFrame {
 
         setBounds(0, 0, 410, 330);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jmiAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAlunoActionPerformed
+        FormRegisterStudent register = new FormRegisterStudent();
+        register.setVisible(true);
+    }//GEN-LAST:event_jmiAlunoActionPerformed
+
+    private void jmiEscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiEscActionPerformed
+        //Encerra todo o sistema
+        System.exit(0);
+    }//GEN-LAST:event_jmiEscActionPerformed
 
     /**
      * @param args the command line arguments
@@ -92,8 +125,10 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMBar;
+    private javax.swing.JMenu jmCadastros;
+    private javax.swing.JMenu jmEsc;
+    private javax.swing.JMenuItem jmiAluno;
+    private javax.swing.JMenuItem jmiEsc;
     // End of variables declaration//GEN-END:variables
 }

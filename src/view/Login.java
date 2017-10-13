@@ -6,6 +6,7 @@
 package view;
 
 import java.util.HashSet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,7 +37,7 @@ public class Login extends javax.swing.JFrame {
         btnLogin = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
         txtUser = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtPassword = new javax.swing.JPasswordField();
         lblIcon = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -57,12 +58,7 @@ public class Login extends javax.swing.JFrame {
 
         btnExit.setText("Sair");
 
-        jPasswordField1.setText("jPasswordField1");
-
         lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/coroa.png"))); // NOI18N
-        lblIcon.setMaximumSize(new java.awt.Dimension(150, 125));
-        lblIcon.setMinimumSize(new java.awt.Dimension(150, 125));
-        lblIcon.setPreferredSize(new java.awt.Dimension(150, 125));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -81,21 +77,21 @@ public class Login extends javax.swing.JFrame {
                                 .addGap(8, 8, 8)
                                 .addComponent(lblPassword)
                                 .addGap(18, 18, 18)
-                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(54, 54, 54)
                                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(170, 170, 170)
-                        .addComponent(lblIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblIcon)))
                 .addContainerGap(124, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblIcon)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -107,7 +103,7 @@ public class Login extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(lblPassword))
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnLogin)
@@ -119,9 +115,17 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
-        MainScreen screen = new MainScreen();
-        screen.setVisible(true);
+        //Condicao para acessar tela principal
+        if (txtUser.getText().equals("admin")&& txtPassword.getText().equals("1234")){
+            //Chama tela principal
+            MainScreen screen = new MainScreen();
+            screen.setVisible(true);
+            //Fecha tela anterior
+            dispose();
+        }
+        else{
+            JOptionPane.showMessageDialog(rootPane, "Usuario ou senha invalido !!!");
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
@@ -162,10 +166,10 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnLogin;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JLabel lblIcon;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblUser;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }

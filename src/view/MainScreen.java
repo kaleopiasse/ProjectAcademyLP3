@@ -5,18 +5,20 @@
  */
 package view;
 
+import controller.ConnectionDB;
+
 /**
  *
  * @author kaleo
  */
 public class MainScreen extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MainScreen
-     */
+    ConnectionDB connection = new ConnectionDB();
+    
     public MainScreen() {
         initComponents();
         setLocationRelativeTo(null);
+        connection.connection(); 
     }
 
     /**
@@ -36,11 +38,12 @@ public class MainScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 600));
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setSize(new java.awt.Dimension(800, 600));
 
         jmCadastros.setText("Cadastros");
+        jmCadastros.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
 
+        jmiAluno.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jmiAluno.setText("Aluno");
         jmiAluno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -52,7 +55,9 @@ public class MainScreen extends javax.swing.JFrame {
         jMBar.add(jmCadastros);
 
         jmEsc.setText("Sair");
+        jmEsc.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
 
+        jmiEsc.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jmiEsc.setText("Sair do sistema");
         jmiEsc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,7 +78,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 283, Short.MAX_VALUE)
+            .addGap(0, 281, Short.MAX_VALUE)
         );
 
         setBounds(0, 0, 410, 330);
@@ -85,6 +90,7 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiAlunoActionPerformed
 
     private void jmiEscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiEscActionPerformed
+        connection.desconnection();
         //Encerra todo o sistema
         System.exit(0);
     }//GEN-LAST:event_jmiEscActionPerformed

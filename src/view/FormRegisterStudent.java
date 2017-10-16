@@ -5,6 +5,10 @@
  */
 package view;
 
+import controller.ConnectionDB;
+import controller.PersonController;
+import model.PersonModel;
+
 /**
  *
  * @author kaleo
@@ -14,6 +18,11 @@ public class FormRegisterStudent extends javax.swing.JFrame {
     /**
      * Creates new form FormRegisterStudent
      */
+    
+    PersonModel personMod = new PersonModel();
+    ConnectionDB cntn = new ConnectionDB();
+    PersonController personCon = new PersonController();
+    
     public FormRegisterStudent() {
         initComponents();
         setLocationRelativeTo(null); //centralizar tela 
@@ -37,19 +46,33 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         lblCpf = new javax.swing.JLabel();
         lblTelephone = new javax.swing.JLabel();
         cbxSex = new javax.swing.JComboBox();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        lblSituation = new javax.swing.JLabel();
+        pnlButtons = new javax.swing.JPanel();
+        btnCreate = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox();
         txtCpf = new javax.swing.JFormattedTextField();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        txtPhone = new javax.swing.JFormattedTextField();
+        lblStreet = new javax.swing.JLabel();
+        lblDistrict = new javax.swing.JLabel();
+        lblNumber = new javax.swing.JLabel();
+        lblCep = new javax.swing.JLabel();
+        lblState = new javax.swing.JLabel();
+        lblCity = new javax.swing.JLabel();
+        lblComplement = new javax.swing.JLabel();
+        txtStreet = new javax.swing.JTextField();
+        txtNumber = new javax.swing.JTextField();
+        txtDistrict = new javax.swing.JTextField();
+        txtComplement = new javax.swing.JTextField();
+        txtCep = new javax.swing.JFormattedTextField();
+        cbxState = new javax.swing.JComboBox<>();
+        txtCity = new javax.swing.JTextField();
         lblRegisterStudents = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(null);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -57,36 +80,40 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(700, 500));
         jPanel1.setLayout(null);
 
-        lblName.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        lblName.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblName.setText("Nome:");
         jPanel1.add(lblName);
-        lblName.setBounds(10, 50, 60, 30);
+        lblName.setBounds(10, 60, 60, 30);
 
-        lblSex.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        lblSex.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblSex.setText("Sexo:");
         jPanel1.add(lblSex);
-        lblSex.setBounds(430, 20, 40, 20);
+        lblSex.setBounds(470, 60, 50, 30);
 
-        lblEmail.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        lblEmail.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblEmail.setText("E-mail:");
         jPanel1.add(lblEmail);
-        lblEmail.setBounds(10, 80, 60, 30);
-        jPanel1.add(txtName);
-        txtName.setBounds(70, 50, 280, 30);
-        jPanel1.add(txtEmail);
-        txtEmail.setBounds(70, 80, 280, 30);
+        lblEmail.setBounds(10, 100, 60, 30);
 
-        lblCpf.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtName.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jPanel1.add(txtName);
+        txtName.setBounds(70, 60, 390, 30);
+
+        txtEmail.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jPanel1.add(txtEmail);
+        txtEmail.setBounds(70, 100, 390, 30);
+
+        lblCpf.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblCpf.setText("CPF:");
         jPanel1.add(lblCpf);
         lblCpf.setBounds(10, 20, 60, 30);
 
-        lblTelephone.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        lblTelephone.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblTelephone.setText("Telefone:");
         jPanel1.add(lblTelephone);
-        lblTelephone.setBounds(10, 110, 60, 30);
+        lblTelephone.setBounds(310, 20, 100, 30);
 
-        cbxSex.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        cbxSex.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         cbxSex.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Feminino", "Outro" }));
         cbxSex.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,34 +121,43 @@ public class FormRegisterStudent extends javax.swing.JFrame {
             }
         });
         jPanel1.add(cbxSex);
-        cbxSex.setBounds(470, 20, 100, 21);
+        cbxSex.setBounds(520, 60, 140, 30);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel1.setText("Situação:");
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(430, 80, 60, 15);
+        lblSituation.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblSituation.setText("Situação:");
+        jPanel1.add(lblSituation);
+        lblSituation.setBounds(470, 100, 80, 30);
 
-        jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(0));
+        pnlButtons.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-Ok-104.png"))); // NOI18N
-        jPanel2.add(jButton2);
-
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-Cancelar-104.png"))); // NOI18N
-        jPanel2.add(jButton3);
+        btnCreate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-Adicionar usuário masculino-104.png"))); // NOI18N
+        btnCreate.setToolTipText("Adicionar novo Aluno");
+        pnlButtons.add(btnCreate);
 
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-Salvar Filled-50.png"))); // NOI18N
-        jPanel2.add(btnSave);
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+        pnlButtons.add(btnSave);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-Lixo-104.png"))); // NOI18N
-        jPanel2.add(jButton1);
+        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-Editar-104.png"))); // NOI18N
+        pnlButtons.add(btnUpdate);
 
-        jPanel1.add(jPanel2);
-        jPanel2.setBounds(650, 10, 120, 480);
+        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-Cancelar-104.png"))); // NOI18N
+        pnlButtons.add(btnCancel);
 
-        jComboBox1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ativo", "Inativo", "Bloqueado", " " }));
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-Lixo-104.png"))); // NOI18N
+        pnlButtons.add(btnDelete);
+
+        jPanel1.add(pnlButtons);
+        pnlButtons.setBounds(670, 10, 100, 480);
+
+        jComboBox1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ativo", "Inativo", "Bloqueado" }));
         jPanel1.add(jComboBox1);
-        jComboBox1.setBounds(490, 80, 86, 20);
+        jComboBox1.setBounds(550, 100, 110, 30);
 
         try {
             txtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
@@ -129,26 +165,96 @@ public class FormRegisterStudent extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtCpf.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtCpf.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtCpf.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         txtCpf.setMinimumSize(new java.awt.Dimension(5, 16));
         jPanel1.add(txtCpf);
-        txtCpf.setBounds(70, 20, 280, 30);
+        txtCpf.setBounds(70, 20, 220, 30);
 
         try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
+            txtPhone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jPanel1.add(jFormattedTextField1);
-        jFormattedTextField1.setBounds(70, 110, 280, 30);
+        txtPhone.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jPanel1.add(txtPhone);
+        txtPhone.setBounds(390, 20, 270, 30);
+
+        lblStreet.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblStreet.setText("Rua:");
+        jPanel1.add(lblStreet);
+        lblStreet.setBounds(10, 140, 60, 30);
+
+        lblDistrict.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblDistrict.setText("Bairro:");
+        jPanel1.add(lblDistrict);
+        lblDistrict.setBounds(10, 180, 53, 30);
+
+        lblNumber.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblNumber.setText("Nro:");
+        jPanel1.add(lblNumber);
+        lblNumber.setBounds(470, 140, 34, 30);
+
+        lblCep.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblCep.setText("Cep:");
+        jPanel1.add(lblCep);
+        lblCep.setBounds(10, 220, 38, 30);
+
+        lblState.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblState.setText("Estado:");
+        jPanel1.add(lblState);
+        lblState.setBounds(150, 220, 70, 30);
+
+        lblCity.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblCity.setText("Cidade:");
+        jPanel1.add(lblCity);
+        lblCity.setBounds(380, 220, 70, 30);
+
+        lblComplement.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblComplement.setText("Complemento:");
+        jPanel1.add(lblComplement);
+        lblComplement.setBounds(380, 180, 120, 30);
+
+        txtStreet.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jPanel1.add(txtStreet);
+        txtStreet.setBounds(70, 140, 390, 31);
+
+        txtNumber.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jPanel1.add(txtNumber);
+        txtNumber.setBounds(510, 140, 150, 31);
+
+        txtDistrict.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jPanel1.add(txtDistrict);
+        txtDistrict.setBounds(70, 180, 300, 31);
+
+        txtComplement.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jPanel1.add(txtComplement);
+        txtComplement.setBounds(500, 180, 160, 31);
+
+        try {
+            txtCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtCep.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jPanel1.add(txtCep);
+        txtCep.setBounds(50, 220, 90, 31);
+
+        cbxState.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        cbxState.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SP", "RJ" }));
+        jPanel1.add(cbxState);
+        cbxState.setBounds(220, 220, 150, 31);
+
+        txtCity.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jPanel1.add(txtCity);
+        txtCity.setBounds(450, 220, 210, 31);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(10, 30, 780, 550);
 
-        lblRegisterStudents.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblRegisterStudents.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblRegisterStudents.setText("Cadastro de Alunos");
         getContentPane().add(lblRegisterStudents);
-        lblRegisterStudents.setBounds(10, 10, 200, 17);
+        lblRegisterStudents.setBounds(10, 10, 200, 22);
 
         setBounds(0, 0, 810, 630);
     }// </editor-fold>//GEN-END:initComponents
@@ -156,6 +262,23 @@ public class FormRegisterStudent extends javax.swing.JFrame {
     private void cbxSexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxSexActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxSexActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        personMod.setCpf(txtCpf.getText().replace(".","").replace("-",""));
+        //personMod.setPhone(txtPhone.getText());
+        personMod.setName(txtName.getText());
+        personMod.setSex((String)cbxSex.getSelectedItem());
+        //personMod.setEmail(txtEmail.getText());
+        personMod.setStreet(txtStreet.getText());
+        personMod.setDistrict(txtDistrict.getText());
+        personMod.setNum(Integer.parseInt(txtNumber.getText()));
+        personMod.setCep(txtCep.getText().replace("-",""));
+        personMod.setCity(txtCity.getText());
+        personMod.setState((String)cbxState.getSelectedItem());
+        personCon.Save(personMod);
+        
+    }//GEN-LAST:event_btnSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -193,24 +316,39 @@ public class FormRegisterStudent extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnCreate;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox cbxSex;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox<String> cbxState;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblCep;
+    private javax.swing.JLabel lblCity;
+    private javax.swing.JLabel lblComplement;
     private javax.swing.JLabel lblCpf;
+    private javax.swing.JLabel lblDistrict;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblNumber;
     private javax.swing.JLabel lblRegisterStudents;
     private javax.swing.JLabel lblSex;
+    private javax.swing.JLabel lblSituation;
+    private javax.swing.JLabel lblState;
+    private javax.swing.JLabel lblStreet;
     private javax.swing.JLabel lblTelephone;
+    private javax.swing.JPanel pnlButtons;
+    private javax.swing.JFormattedTextField txtCep;
+    private javax.swing.JTextField txtCity;
+    private javax.swing.JTextField txtComplement;
     private javax.swing.JFormattedTextField txtCpf;
+    private javax.swing.JTextField txtDistrict;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtNumber;
+    private javax.swing.JFormattedTextField txtPhone;
+    private javax.swing.JTextField txtStreet;
     // End of variables declaration//GEN-END:variables
 }

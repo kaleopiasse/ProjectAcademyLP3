@@ -3,22 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package projectacademylp3;
+package model;
 
 /**
  *
  * @author kaleo
  */
-public class Person {
+public class PersonModel {
     
     private String cpf;
     private String name;
     private String sex;
-    private int dtBirthday;
     private String street;
     private int num;
-    private String neigh;
-    private int cep;
+    private String district;
+    private String cep;
     private String city;
     private String state;           
     private String phone;
@@ -48,14 +47,6 @@ public class Person {
         this.sex = sex;
     }
 
-    public int getDtBirthday() {
-        return dtBirthday;
-    }
-
-    public void setDtBirthday(int dtBirthday) {
-        this.dtBirthday = dtBirthday;
-    }
-
     public String getStreet() {
         return street;
     }
@@ -72,19 +63,19 @@ public class Person {
         this.num = num;
     }
 
-    public String getNeigh() {
-        return neigh;
+    public String getDistrict() {
+        return district;
     }
 
-    public void setNeigh(String neigh) {
-        this.neigh = neigh;
+    public void setDistrict(String district) {
+        this.district = district;
     }
 
-    public int getCep() {
+    public String getCep() {
         return cep;
     }
 
-    public void setCep(int cep) {
+    public void setCep(String cep) {
         this.cep = cep;
     }
 
@@ -119,5 +110,7 @@ public class Person {
     public void setEmail(String email) {
         this.email = email;
     }
+    
+    
 }
 

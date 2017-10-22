@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package modelBeans;
 
 /**
  *
@@ -22,9 +22,10 @@ public class PersonModel {
     private String state;           
     private String phone;
     private String email;
+    private String search;
 
     public String getCpf() {
-        return cpf;
+        return cpf.replace(".","").replace("-","");
     }
 
     public void setCpf(String cpf) {
@@ -111,6 +112,13 @@ public class PersonModel {
         this.email = email;
     }
     
+    public String getSearch() {
+        return search.replace(".","").replace("-","");
+    }
+    
+    public void setSearch(String pesquisa) {
+        this.search = pesquisa;
+    }
     
 }
 

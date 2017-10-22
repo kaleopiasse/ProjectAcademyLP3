@@ -5,7 +5,7 @@
  */
 package view;
 
-import controller.ConnectionDB;
+import modelConnection.ConnectionDB;
 
 /**
  *
@@ -37,6 +37,7 @@ public class MainScreen extends javax.swing.JFrame {
         jmiEsc = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Academia King Muay Thai");
         setMinimumSize(new java.awt.Dimension(800, 600));
         setSize(new java.awt.Dimension(800, 600));
 

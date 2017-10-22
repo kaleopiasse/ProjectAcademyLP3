@@ -5,9 +5,9 @@
  */
 package view;
 
-import controller.ConnectionDB;
-import controller.PersonController;
-import model.PersonModel;
+import modelConnection.ConnectionDB;
+import modelDao.PersonDao;
+import modelBeans.PersonModel;
 
 /**
  *
@@ -21,11 +21,17 @@ public class FormRegisterStudent extends javax.swing.JFrame {
     
     PersonModel personMod = new PersonModel();
     ConnectionDB cntn = new ConnectionDB();
-    PersonController personCon = new PersonController();
+    PersonDao personCon = new PersonDao();
+    private int flagButton = 0;
+    //private boolean hasBeenClickedSearch = false;
     
     public FormRegisterStudent() {
         initComponents();
-        setLocationRelativeTo(null); //centralizar tela 
+        setLocationRelativeTo(null);//centralizar tela
+        disableText();
+        btnSave.setEnabled(false);
+        btnDelete.setEnabled(false);
+        btnUpdate.setEnabled(false);
     }
 
     /**
@@ -53,7 +59,8 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         btnUpdate = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox();
+        btnSearch = new javax.swing.JButton();
+        cbxSituation = new javax.swing.JComboBox();
         txtCpf = new javax.swing.JFormattedTextField();
         txtPhone = new javax.swing.JFormattedTextField();
         lblStreet = new javax.swing.JLabel();
@@ -73,6 +80,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         lblRegisterStudents = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Academia King Muay Thai");
         getContentPane().setLayout(null);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -132,6 +140,11 @@ public class FormRegisterStudent extends javax.swing.JFrame {
 
         btnCreate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-Adicionar usuário masculino-104.png"))); // NOI18N
         btnCreate.setToolTipText("Adicionar novo Aluno");
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateActionPerformed(evt);
+            }
+        });
         pnlButtons.add(btnCreate);
 
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-Salvar Filled-50.png"))); // NOI18N
@@ -143,21 +156,39 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         pnlButtons.add(btnSave);
 
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-Editar-104.png"))); // NOI18N
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
         pnlButtons.add(btnUpdate);
 
         btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-Cancelar-104.png"))); // NOI18N
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
         pnlButtons.add(btnCancel);
 
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-Lixo-104.png"))); // NOI18N
         pnlButtons.add(btnDelete);
 
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-Pesquisa propriedade-50.png"))); // NOI18N
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+        pnlButtons.add(btnSearch);
+
         jPanel1.add(pnlButtons);
         pnlButtons.setBounds(670, 10, 100, 480);
 
-        jComboBox1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ativo", "Inativo", "Bloqueado" }));
-        jPanel1.add(jComboBox1);
-        jComboBox1.setBounds(550, 100, 110, 30);
+        cbxSituation.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        cbxSituation.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ativo", "Inativo", "Bloqueado" }));
+        jPanel1.add(cbxSituation);
+        cbxSituation.setBounds(550, 100, 110, 30);
 
         try {
             txtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
@@ -264,22 +295,141 @@ public class FormRegisterStudent extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxSexActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        // TODO add your handling code here:
-        personMod.setCpf(txtCpf.getText().replace(".","").replace("-",""));
-        //personMod.setPhone(txtPhone.getText());
-        personMod.setName(txtName.getText());
-        personMod.setSex((String)cbxSex.getSelectedItem());
-        //personMod.setEmail(txtEmail.getText());
-        personMod.setStreet(txtStreet.getText());
-        personMod.setDistrict(txtDistrict.getText());
-        personMod.setNum(Integer.parseInt(txtNumber.getText()));
-        personMod.setCep(txtCep.getText().replace("-",""));
-        personMod.setCity(txtCity.getText());
-        personMod.setState((String)cbxState.getSelectedItem());
-        personCon.Save(personMod);
-        
+        if (flagButton==1){
+            personMod.setCpf(txtCpf.getText().replace(".","").replace("-",""));
+            //personMod.setPhone(txtPhone.getText());
+            personMod.setName(txtName.getText());
+            personMod.setSex((String)cbxSex.getSelectedItem());
+            //personMod.setEmail(txtEmail.getText());
+            personMod.setStreet(txtStreet.getText());
+            personMod.setDistrict(txtDistrict.getText());
+            personMod.setNum(Integer.parseInt(txtNumber.getText()));
+            personMod.setCep(txtCep.getText().replace("-",""));
+            personMod.setCity(txtCity.getText());
+            personMod.setState((String)cbxState.getSelectedItem());
+            personCon.Save(personMod);
+            clearText();
+            btnCancel.setEnabled(true);
+            btnDelete.setEnabled(true);
+            btnUpdate.setEnabled(true);
+        }
+        else {
+            personMod.setCpf(txtCpf.getText().replace(".","").replace("-",""));
+            //personMod.setPhone(txtPhone.getText());
+            personMod.setName(txtName.getText());
+            personMod.setSex((String)cbxSex.getSelectedItem());
+            //personMod.setEmail(txtEmail.getText());
+            personMod.setStreet(txtStreet.getText());
+            personMod.setDistrict(txtDistrict.getText());
+            personMod.setNum(Integer.parseInt(txtNumber.getText()));
+            personMod.setCep(txtCep.getText().replace("-",""));
+            personMod.setCity(txtCity.getText());
+            personMod.setState((String)cbxState.getSelectedItem());
+            personCon.updatePerson(personMod);
+            disableText();
+            btnCreate.setEnabled(false);
+            btnSave.setEnabled(false);
+            btnCancel.setEnabled(true);
+            btnDelete.setEnabled(true);
+            btnUpdate.setEnabled(true);
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+            personMod.setSearch(txtCpf.getText());
+            PersonModel model = personCon.searchPerson(personMod);
+            txtCpf.setText(model.getCpf());
+            //personMod.setPhone(txtPhone.getText());
+            txtName.setText(model.getName());
+            cbxSex.setSelectedItem(model.getSex());
+            //personMod.setEmail(txtEmail.getText());
+            txtStreet.setText(model.getStreet());
+            txtDistrict.setText(model.getDistrict());
+            txtNumber.setText(Integer.toString(model.getNum()));
+            txtCep.setText(model.getCep());
+            txtCity.setText(model.getCity());
+            cbxState.setSelectedItem(model.getState());
+            btnDelete.setEnabled(true);
+            btnUpdate.setEnabled(true);
+            btnCreate.setEnabled(false);
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+            flagButton=1;
+            enabledText();
+            btnSave.setEnabled(true);
+            btnCancel.setEnabled(true);
+            btnSearch.setEnabled(false);
+            btnDelete.setEnabled(false);
+            btnUpdate.setEnabled(false);        
+    }//GEN-LAST:event_btnCreateActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        clearText();
+        disableText();
+        btnCreate.setEnabled(true);
+        btnDelete.setEnabled(true);
+        btnSearch.setEnabled(true);
+        
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        flagButton = 2;
+        enabledText();
+        btnSave.setEnabled(true);
+        btnDelete.setEnabled(false);
+        btnSearch.setEnabled(false);
+    }//GEN-LAST:event_btnUpdateActionPerformed
+    
+    private void clearText (){
+        txtCpf.setText("");
+        txtName.setText("");
+        //cbxSex.set("");
+        txtEmail.setText("");
+        //cbxSituation.set("");
+        txtStreet.setText("");
+        txtDistrict.setText("");
+        txtComplement.setText("");
+        txtNumber.setText("");
+        txtCep.setText("");
+        txtCity.setText("");
+        //cbxState.setText("");
+    }
+    
+    private void enabledText (){
+        txtCpf.setEnabled(true);
+        txtPhone.setEnabled(true);
+        txtName.setEnabled(true);
+        cbxSex.setEnabled(true);
+        txtEmail.setEnabled(true);
+        cbxSituation.setEnabled(true);
+        txtStreet.setEnabled(true);
+        txtDistrict.setEnabled(true);
+        txtComplement.setEnabled(true);
+        txtNumber.setEnabled(true);
+        txtCep.setEnabled(true);
+        txtCity.setEnabled(true);
+        cbxState.setEnabled(true);
+    }
+    
+    private void disableText (){
+        txtCpf.setEnabled(true);
+        txtPhone.setEnabled(false);
+        txtName.setEnabled(false);
+        cbxSex.setEnabled(false);
+        txtEmail.setEnabled(false);
+        cbxSituation.setEnabled(false);
+        txtStreet.setEnabled(false);
+        txtDistrict.setEnabled(false);
+        txtComplement.setEnabled(false);
+        txtNumber.setEnabled(false);
+        txtCep.setEnabled(false);
+        txtCity.setEnabled(false);
+        cbxState.setEnabled(false);
+        btnSave.setEnabled(false);
+        btnDelete.setEnabled(false);
+        btnUpdate.setEnabled(false);
+    } 
     /**
      * @param args the command line arguments
      */
@@ -320,10 +470,11 @@ public class FormRegisterStudent extends javax.swing.JFrame {
     private javax.swing.JButton btnCreate;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox cbxSex;
+    private javax.swing.JComboBox cbxSituation;
     private javax.swing.JComboBox<String> cbxState;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCep;
     private javax.swing.JLabel lblCity;

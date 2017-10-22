@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package modelConnection;
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,6 +34,16 @@ public class ConnectionDB {
             JOptionPane.showMessageDialog(null, "Erro ao tentar conectar com o banco de dados\n"+ex.getMessage());
         }
     }
+    
+    public void executeSql (String sql){
+        
+        try {
+            stm = conn.createStatement(rs.TYPE_SCROLL_INSENSITIVE, rs.CONCUR_READ_ONLY);
+            rs = stm.executeQuery(sql);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao executar SQL \n" +ex.getMessage());
+        }
+    }   
     
     public void desconnection(){
         try{

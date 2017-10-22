@@ -5,6 +5,7 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
 import modelConnection.ConnectionDB;
 import modelDao.PersonDao;
 import modelBeans.PersonModel;
@@ -172,6 +173,11 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         pnlButtons.add(btnCancel);
 
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-Lixo-104.png"))); // NOI18N
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
         pnlButtons.add(btnDelete);
 
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-Pesquisa propriedade-50.png"))); // NOI18N
@@ -380,6 +386,20 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         btnDelete.setEnabled(false);
         btnSearch.setEnabled(false);
     }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        int question = 0;
+        question = JOptionPane.showConfirmDialog(rootPane, "Deseja relamente excluir os dados ?");
+        if (question==JOptionPane.YES_OPTION){
+            personMod.setCpf(txtCpf.getText().replace(".","").replace("-",""));
+            personCon.deletePerson(personMod);
+            clearText();
+            disableText();
+            btnDelete.setEnabled(false);
+        }
+        
+    }//GEN-LAST:event_btnDeleteActionPerformed
     
     private void clearText (){
         txtCpf.setText("");

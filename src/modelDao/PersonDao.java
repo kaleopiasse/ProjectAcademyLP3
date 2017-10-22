@@ -42,6 +42,19 @@ public class PersonDao {
         cntn.desconnection();
     }
     
+    public void deletePerson (PersonModel personMod){
+        cntn.connection();
+        try {
+            PreparedStatement pst = cntn.conn.prepareStatement("delete from person where cpf=?");
+            pst.setString(1, personMod.getCpf());
+            pst.execute();
+            JOptionPane.showMessageDialog(null,"Dados excluidos com sucesso !!!");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Erro ao excluir os dados! \n" +ex);
+        }
+        cntn.desconnection();
+    }
+    
     public void updatePerson (PersonModel personMod){
         cntn.connection();
         try {

@@ -22,7 +22,7 @@ public class StudentDao {
     PersonModel personMod = new PersonModel();
     StudentModel studentMod = new StudentModel();
     
-    public void SaveStudent (PersonModel personMod, StudentModel studentMod){
+    public void saveStudent (PersonModel personMod, StudentModel studentMod){
         String personCpf;
         cntn.connection();
         try {

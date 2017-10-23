@@ -20,7 +20,7 @@ public class PersonDao {
     ConnectionDB cntn = new ConnectionDB();
     PersonModel personMod = new PersonModel();
     
-    public void Save (PersonModel personMod){
+    public void savePerson (PersonModel personMod){
         cntn.connection();
         try {
             PreparedStatement pst = cntn.conn.prepareStatement("insert into person (cpf,name, sex,street, district,num,"
@@ -98,6 +98,5 @@ public class PersonDao {
         }
         cntn.desconnection();
         return personMod;
-    }
-    
+    } 
 }

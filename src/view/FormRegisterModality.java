@@ -5,6 +5,7 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
 import modelBeans.ModalityModel;
 import modelConnection.ConnectionDB;
 import modelDao.ModalityDao;
@@ -209,30 +210,17 @@ public class FormRegisterModality extends javax.swing.JFrame {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         if (flagButton==1){
             modalityMod.setName(txtName.getText());
-            modalityMod.setPrice(Float.parseFloat(txtPrice.getText()));
-            modalityCon.SaveModality(modalityMod);
+            modalityMod.setPrice(Double.parseDouble(txtPrice.getText()));
+            modalityCon.saveModality(modalityMod);
             clearText();
             btnCancel.setEnabled(true);
             btnSave.setEnabled(false);
             btnSearch.setEnabled(true);
         }
         else {
-            personMod.setCpf(txtCpf.getText().replace(".","").replace("-",""));
-            //personMod.setPhone(txtPhone.getText());
-            personMod.setName(txtId.getText());
-            personMod.setSex((String)cbxSex.getSelectedItem());
-            //personMod.setEmail(txtEmail.getText());
-            personMod.setStreet(txtStreet.getText());
-            personMod.setDistrict(txtDistrict.getText());
-            personMod.setNum(Integer.parseInt(txtNumber.getText()));
-            personMod.setCep(txtCep.getText().replace("-",""));
-            personMod.setCity(txtCity.getText());
-            personMod.setState((String)cbxState.getSelectedItem());
-            personMod.setComplement(txtComplement.getText());
-            studentMod.setCpf(txtCpf.getText().replace(".","").replace("-",""));
-            studentMod.setSituation((String)cbxSituation.getSelectedItem());
-            personCon.updatePerson(personMod);
-            studentCon.updateStudent(studentMod);
+            modalityMod.setName(txtName.getText());
+            modalityMod.setPrice(Double.parseDouble(txtPrice.getText()));
+            modalityCon.updateModality(modalityMod);
             disableText();
             btnCreate.setEnabled(false);
             btnSave.setEnabled(false);
@@ -264,8 +252,8 @@ public class FormRegisterModality extends javax.swing.JFrame {
         int question = 0;
         question = JOptionPane.showConfirmDialog(rootPane, "Deseja relamente excluir os dados ?");
         if (question==JOptionPane.YES_OPTION){
-            personMod.setCpf(txtCpf.getText().replace(".","").replace("-",""));
-            studentCon.deleteStudent(personMod, studentMod);
+            modalityMod.setId(Integer.parseInt(txtId.getText()));
+            modalityCon.deleteModality(modalityMod);
             clearText();
             disableText();
             btnDelete.setEnabled(false);
@@ -274,23 +262,11 @@ public class FormRegisterModality extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        personMod.setSearch(txtCpf.getText());
-        studentMod.setSearch(txtCpf.getText());
-        PersonModel model = personCon.searchPerson(personMod);
-        StudentModel stmodel = studentCon.searchStudent(studentMod);
-        txtCpf.setText(model.getCpf());
-        //personMod.setPhone(txtPhone.getText());
-        txtId.setText(model.getName());
-        cbxSex.setSelectedItem(model.getSex());
-        //personMod.setEmail(txtEmail.getText());
-        txtStreet.setText(model.getStreet());
-        txtDistrict.setText(model.getDistrict());
-        txtNumber.setText(Integer.toString(model.getNum()));
-        txtCep.setText(model.getCep());
-        txtCity.setText(model.getCity());
-        cbxState.setSelectedItem(model.getState());
-        txtComplement.setText(model.getComplement());
-        cbxSituation.setSelectedItem(stmodel.getSituation());
+        modalityMod.setSearch(txtName.getText());
+        ModalityModel model = modalityCon.searchModality(modalityMod);
+        txtId.setText(Integer.toString(model.getId()));
+        txtName.setText(model.getName());
+        txtPrice.setText(Double.toString(model.getPrice()));
         btnDelete.setEnabled(true);
         btnUpdate.setEnabled(true);
         btnCreate.setEnabled(false);

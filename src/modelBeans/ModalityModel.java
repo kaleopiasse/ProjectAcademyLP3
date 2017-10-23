@@ -13,7 +13,8 @@ public class ModalityModel {
     
     private int id;
     private String name;
-    private float price;
+    private double price;
+    private String search;
 
     public int getId() {
         return id;
@@ -35,9 +36,15 @@ public class ModalityModel {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
-    
-    
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
+    }
 }

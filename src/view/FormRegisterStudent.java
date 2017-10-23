@@ -18,17 +18,12 @@ import modelDao.StudentDao;
  */
 public class FormRegisterStudent extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FormRegisterStudent
-     */
-    
     PersonModel personMod = new PersonModel();
     StudentModel studentMod = new StudentModel();
     ConnectionDB cntn = new ConnectionDB();
     PersonDao personCon = new PersonDao();
     StudentDao studentCon = new StudentDao();
     private int flagButton = 0;
-    //private boolean hasBeenClickedSearch = false;
     
     public FormRegisterStudent() {
         initComponents();

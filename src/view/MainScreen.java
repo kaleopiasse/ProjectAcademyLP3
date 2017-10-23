@@ -33,7 +33,7 @@ public class MainScreen extends javax.swing.JFrame {
         jMBar = new javax.swing.JMenuBar();
         jmCadastros = new javax.swing.JMenu();
         jmiAluno = new javax.swing.JMenuItem();
-        mnModalidade = new javax.swing.JMenuItem();
+        mnModality = new javax.swing.JMenuItem();
         jmEsc = new javax.swing.JMenu();
         jmiEsc = new javax.swing.JMenuItem();
 
@@ -54,13 +54,14 @@ public class MainScreen extends javax.swing.JFrame {
         });
         jmCadastros.add(jmiAluno);
 
-        mnModalidade.setText("Modalidade");
-        mnModalidade.addActionListener(new java.awt.event.ActionListener() {
+        mnModality.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        mnModality.setText("Modalidade");
+        mnModality.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnModalidadeActionPerformed(evt);
+                mnModalityActionPerformed(evt);
             }
         });
-        jmCadastros.add(mnModalidade);
+        jmCadastros.add(mnModality);
 
         jMBar.add(jmCadastros);
 
@@ -105,9 +106,10 @@ public class MainScreen extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jmiEscActionPerformed
 
-    private void mnModalidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnModalidadeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mnModalidadeActionPerformed
+    private void mnModalityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnModalityActionPerformed
+        FormRegisterModality register = new FormRegisterModality();
+        register.setVisible(true);
+    }//GEN-LAST:event_mnModalityActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,6 +152,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenu jmEsc;
     private javax.swing.JMenuItem jmiAluno;
     private javax.swing.JMenuItem jmiEsc;
-    private javax.swing.JMenuItem mnModalidade;
+    private javax.swing.JMenuItem mnModality;
     // End of variables declaration//GEN-END:variables
 }

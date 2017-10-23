@@ -73,8 +73,8 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="txtName" min="-2" pref="80" max="-2" attributes="0"/>
-                      <Component id="txtEmail" min="-2" pref="390" max="-2" attributes="0"/>
+                      <Component id="txtId" min="-2" pref="80" max="-2" attributes="0"/>
+                      <Component id="txtName" min="-2" pref="390" max="-2" attributes="0"/>
                       <Component id="txtPrice" min="-2" pref="82" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="214" max="32767" attributes="0"/>
@@ -91,12 +91,12 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lblId" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="txtName" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="txtId" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblNameModality" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="txtEmail" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="txtName" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -194,7 +194,7 @@
             <Property name="text" type="java.lang.String" value="ID:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtName">
+        <Component class="javax.swing.JTextField" name="txtId">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="16" style="0"/>
@@ -209,7 +209,7 @@
             <Property name="text" type="java.lang.String" value="Nome:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtEmail">
+        <Component class="javax.swing.JTextField" name="txtName">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="16" style="0"/>

@@ -23,8 +23,9 @@ price float,
 primary key (id_product));
 
 create table modality(
-id_modality integer,
+id_modality integer auto_increment,
 name varchar(50),
+price decimal(10,2),
 primary key (id_modality));
 
 create table training_plan (

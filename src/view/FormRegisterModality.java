@@ -5,15 +5,21 @@
  */
 package view;
 
+import modelBeans.ModalityModel;
+import modelConnection.ConnectionDB;
+import modelDao.ModalityDao;
+
 /**
  *
  * @author kaleo
  */
 public class FormRegisterModality extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FormRegisterModality
-     */
+    ConnectionDB cntn = new ConnectionDB();
+    ModalityModel modalityMod = new ModalityModel();
+    ModalityDao modalityCon = new ModalityDao();
+    private int flagButton = 0;
+    
     public FormRegisterModality() {
         initComponents();
         setLocationRelativeTo(null);//centralizar tela
@@ -41,9 +47,9 @@ public class FormRegisterModality extends javax.swing.JFrame {
         btnDelete = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
         lblId = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
+        txtId = new javax.swing.JTextField();
         lblNameModality = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
         lblPriceModality = new javax.swing.JLabel();
         txtPrice = new javax.swing.JFormattedTextField();
 
@@ -107,12 +113,12 @@ public class FormRegisterModality extends javax.swing.JFrame {
         lblId.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblId.setText("ID:");
 
-        txtName.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtId.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
 
         lblNameModality.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblNameModality.setText("Nome:");
 
-        txtEmail.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtName.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
 
         lblPriceModality.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblPriceModality.setText("Valor:");
@@ -138,8 +144,8 @@ public class FormRegisterModality extends javax.swing.JFrame {
                     .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlModalityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
                 .addComponent(pnlButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -153,11 +159,11 @@ public class FormRegisterModality extends javax.swing.JFrame {
                     .addGroup(pnlModalityLayout.createSequentialGroup()
                         .addGroup(pnlModalityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlModalityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNameModality, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlModalityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblPriceModality, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -202,29 +208,18 @@ public class FormRegisterModality extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         if (flagButton==1){
-            personMod.setCpf(txtCpf.getText().replace(".","").replace("-",""));
-            //personMod.setPhone(txtPhone.getText());
-            personMod.setName(txtName.getText());
-            personMod.setSex((String)cbxSex.getSelectedItem());
-            //personMod.setEmail(txtEmail.getText());
-            personMod.setStreet(txtStreet.getText());
-            personMod.setDistrict(txtDistrict.getText());
-            personMod.setNum(Integer.parseInt(txtNumber.getText()));
-            personMod.setCep(txtCep.getText().replace("-",""));
-            personMod.setCity(txtCity.getText());
-            personMod.setState((String)cbxState.getSelectedItem());
-            personMod.setComplement(txtComplement.getText());
-            studentMod.setSituation((String)cbxSituation.getSelectedItem());
-            studentCon.SaveStudent(personMod, studentMod);
+            modalityMod.setName(txtName.getText());
+            modalityMod.setPrice(Float.parseFloat(txtPrice.getText()));
+            modalityCon.SaveModality(modalityMod);
             clearText();
             btnCancel.setEnabled(true);
-            btnDelete.setEnabled(true);
-            btnUpdate.setEnabled(true);
+            btnSave.setEnabled(false);
+            btnSearch.setEnabled(true);
         }
         else {
             personMod.setCpf(txtCpf.getText().replace(".","").replace("-",""));
             //personMod.setPhone(txtPhone.getText());
-            personMod.setName(txtName.getText());
+            personMod.setName(txtId.getText());
             personMod.setSex((String)cbxSex.getSelectedItem());
             //personMod.setEmail(txtEmail.getText());
             personMod.setStreet(txtStreet.getText());
@@ -259,7 +254,7 @@ public class FormRegisterModality extends javax.swing.JFrame {
         clearText();
         disableText();
         btnCreate.setEnabled(true);
-        btnDelete.setEnabled(true);
+        btnDelete.setEnabled(false);
         btnSearch.setEnabled(true);
 
     }//GEN-LAST:event_btnCancelActionPerformed
@@ -285,7 +280,7 @@ public class FormRegisterModality extends javax.swing.JFrame {
         StudentModel stmodel = studentCon.searchStudent(studentMod);
         txtCpf.setText(model.getCpf());
         //personMod.setPhone(txtPhone.getText());
-        txtName.setText(model.getName());
+        txtId.setText(model.getName());
         cbxSex.setSelectedItem(model.getSex());
         //personMod.setEmail(txtEmail.getText());
         txtStreet.setText(model.getStreet());
@@ -302,50 +297,19 @@ public class FormRegisterModality extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void clearText (){
-        txtCpf.setText("");
         txtName.setText("");
-        //cbxSex.set("");
-        txtEmail.setText("");
-        //cbxSituation.set("");
-        txtStreet.setText("");
-        txtDistrict.setText("");
-        txtComplement.setText("");
-        txtNumber.setText("");
-        txtCep.setText("");
-        txtCity.setText("");
-        //cbxState.setText("");
+        txtId.setText("");
+        txtPrice.setText("");
     }
     
     private void enabledText (){
-        txtCpf.setEnabled(true);
-        txtPhone.setEnabled(true);
-        txtName.setEnabled(true);
-        cbxSex.setEnabled(true);
-        txtEmail.setEnabled(true);
-        cbxSituation.setEnabled(true);
-        txtStreet.setEnabled(true);
-        txtDistrict.setEnabled(true);
-        txtComplement.setEnabled(true);
-        txtNumber.setEnabled(true);
-        txtCep.setEnabled(true);
-        txtCity.setEnabled(true);
-        cbxState.setEnabled(true);
+        txtPrice.setEnabled(true);
     }
     
     private void disableText (){
-        txtCpf.setEnabled(true);
-        txtPhone.setEnabled(false);
-        txtName.setEnabled(false);
-        cbxSex.setEnabled(false);
-        txtEmail.setEnabled(false);
-        cbxSituation.setEnabled(false);
-        txtStreet.setEnabled(false);
-        txtDistrict.setEnabled(false);
-        txtComplement.setEnabled(false);
-        txtNumber.setEnabled(false);
-        txtCep.setEnabled(false);
-        txtCity.setEnabled(false);
-        cbxState.setEnabled(false);
+        txtName.setEnabled(true);
+        txtPrice.setEnabled(false);
+        txtId.setEnabled(false);
         btnSave.setEnabled(false);
         btnDelete.setEnabled(false);
         btnUpdate.setEnabled(false);
@@ -397,7 +361,7 @@ public class FormRegisterModality extends javax.swing.JFrame {
     private javax.swing.JLabel lblPriceModality;
     private javax.swing.JPanel pnlButtons;
     private javax.swing.JPanel pnlModality;
-    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtName;
     private javax.swing.JFormattedTextField txtPrice;
     // End of variables declaration//GEN-END:variables

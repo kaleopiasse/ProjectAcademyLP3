@@ -17,15 +17,17 @@ public class PersonModel {
     private String street;
     private int num;
     private String district;
+    private String complement;
     private String cep;
     private String city;
     private String state;           
     private String phone;
     private String email;
+    private String situation;
     private String search;
 
     public String getCpf() {
-        return cpf.replace(".","").replace("-","");
+        return cpf;
     }
 
     public void setCpf(String cpf) {
@@ -118,6 +120,21 @@ public class PersonModel {
     
     public void setSearch(String pesquisa) {
         this.search = pesquisa;
+    }
+    public String getComplement() {
+        return complement;
+    }
+
+    public void setComplement(String complement) {
+        this.complement = complement;
+    }
+
+    public String getSituation() {
+        return situation;
+    }
+
+    public void setSituation(String situation) {
+        this.situation = situation;
     }
     
 }

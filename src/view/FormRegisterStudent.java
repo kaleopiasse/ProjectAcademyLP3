@@ -7,8 +7,10 @@ package view;
 
 import javax.swing.JOptionPane;
 import modelConnection.ConnectionDB;
-import modelDao.PersonDao;
 import modelBeans.PersonModel;
+import modelBeans.StudentModel;
+import modelDao.PersonDao;
+import modelDao.StudentDao;
 
 /**
  *
@@ -21,8 +23,10 @@ public class FormRegisterStudent extends javax.swing.JFrame {
      */
     
     PersonModel personMod = new PersonModel();
+    StudentModel studentMod = new StudentModel();
     ConnectionDB cntn = new ConnectionDB();
     PersonDao personCon = new PersonDao();
+    StudentDao studentCon = new StudentDao();
     private int flagButton = 0;
     //private boolean hasBeenClickedSearch = false;
     
@@ -44,7 +48,8 @@ public class FormRegisterStudent extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        tbdPnlStudent = new javax.swing.JTabbedPane();
+        pnlFormStudent = new javax.swing.JPanel();
         lblName = new javax.swing.JLabel();
         lblSex = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
@@ -78,49 +83,67 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         txtCep = new javax.swing.JFormattedTextField();
         cbxState = new javax.swing.JComboBox<>();
         txtCity = new javax.swing.JTextField();
-        lblRegisterStudents = new javax.swing.JLabel();
+        pnlStudentRegistration = new javax.swing.JPanel();
+        lblModality = new javax.swing.JLabel();
+        cbxModality = new javax.swing.JComboBox();
+        lblModality2 = new javax.swing.JLabel();
+        cbxModality2 = new javax.swing.JComboBox();
+        lblPlan = new javax.swing.JLabel();
+        cbxPlan = new javax.swing.JComboBox();
+        lblPrice = new javax.swing.JLabel();
+        txtPrice = new javax.swing.JFormattedTextField();
+        lblValid = new javax.swing.JLabel();
+        txtValid = new javax.swing.JFormattedTextField();
+        pnlButtonsRegistration = new javax.swing.JPanel();
+        btnSaveRegistration = new javax.swing.JButton();
+        btnUpdateRegistration = new javax.swing.JButton();
+        btnCancelRegistration = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Academia King Muay Thai");
+        setPreferredSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(null);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.setMinimumSize(new java.awt.Dimension(0, 0));
-        jPanel1.setPreferredSize(new java.awt.Dimension(700, 500));
-        jPanel1.setLayout(null);
+        tbdPnlStudent.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        tbdPnlStudent.setPreferredSize(new java.awt.Dimension(800, 600));
+
+        pnlFormStudent.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnlFormStudent.setMinimumSize(new java.awt.Dimension(0, 0));
+        pnlFormStudent.setPreferredSize(new java.awt.Dimension(700, 500));
+        pnlFormStudent.setLayout(null);
 
         lblName.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblName.setText("Nome:");
-        jPanel1.add(lblName);
-        lblName.setBounds(10, 60, 60, 30);
+        pnlFormStudent.add(lblName);
+        lblName.setBounds(10, 50, 60, 30);
 
         lblSex.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblSex.setText("Sexo:");
-        jPanel1.add(lblSex);
-        lblSex.setBounds(470, 60, 50, 30);
+        pnlFormStudent.add(lblSex);
+        lblSex.setBounds(470, 50, 50, 30);
 
         lblEmail.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblEmail.setText("E-mail:");
-        jPanel1.add(lblEmail);
-        lblEmail.setBounds(10, 100, 60, 30);
+        pnlFormStudent.add(lblEmail);
+        lblEmail.setBounds(10, 90, 60, 30);
 
         txtName.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jPanel1.add(txtName);
-        txtName.setBounds(70, 60, 390, 30);
+        pnlFormStudent.add(txtName);
+        txtName.setBounds(70, 50, 390, 30);
 
         txtEmail.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jPanel1.add(txtEmail);
-        txtEmail.setBounds(70, 100, 390, 30);
+        pnlFormStudent.add(txtEmail);
+        txtEmail.setBounds(70, 90, 390, 30);
 
         lblCpf.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblCpf.setText("CPF:");
-        jPanel1.add(lblCpf);
-        lblCpf.setBounds(10, 20, 60, 30);
+        pnlFormStudent.add(lblCpf);
+        lblCpf.setBounds(10, 10, 60, 30);
 
         lblTelephone.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblTelephone.setText("Telefone:");
-        jPanel1.add(lblTelephone);
-        lblTelephone.setBounds(310, 20, 100, 30);
+        pnlFormStudent.add(lblTelephone);
+        lblTelephone.setBounds(310, 10, 100, 30);
 
         cbxSex.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         cbxSex.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Feminino", "Outro" }));
@@ -129,13 +152,13 @@ public class FormRegisterStudent extends javax.swing.JFrame {
                 cbxSexActionPerformed(evt);
             }
         });
-        jPanel1.add(cbxSex);
-        cbxSex.setBounds(520, 60, 140, 30);
+        pnlFormStudent.add(cbxSex);
+        cbxSex.setBounds(520, 50, 140, 30);
 
         lblSituation.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblSituation.setText("Situação:");
-        jPanel1.add(lblSituation);
-        lblSituation.setBounds(470, 100, 80, 30);
+        pnlFormStudent.add(lblSituation);
+        lblSituation.setBounds(470, 90, 80, 30);
 
         pnlButtons.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -188,13 +211,13 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         });
         pnlButtons.add(btnSearch);
 
-        jPanel1.add(pnlButtons);
+        pnlFormStudent.add(pnlButtons);
         pnlButtons.setBounds(670, 10, 100, 480);
 
         cbxSituation.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         cbxSituation.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ativo", "Inativo", "Bloqueado" }));
-        jPanel1.add(cbxSituation);
-        cbxSituation.setBounds(550, 100, 110, 30);
+        pnlFormStudent.add(cbxSituation);
+        cbxSituation.setBounds(550, 90, 110, 30);
 
         try {
             txtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
@@ -204,8 +227,8 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         txtCpf.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtCpf.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         txtCpf.setMinimumSize(new java.awt.Dimension(5, 16));
-        jPanel1.add(txtCpf);
-        txtCpf.setBounds(70, 20, 220, 30);
+        pnlFormStudent.add(txtCpf);
+        txtCpf.setBounds(70, 10, 220, 30);
 
         try {
             txtPhone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
@@ -213,59 +236,59 @@ public class FormRegisterStudent extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtPhone.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jPanel1.add(txtPhone);
-        txtPhone.setBounds(390, 20, 270, 30);
+        pnlFormStudent.add(txtPhone);
+        txtPhone.setBounds(390, 10, 270, 30);
 
         lblStreet.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblStreet.setText("Rua:");
-        jPanel1.add(lblStreet);
-        lblStreet.setBounds(10, 140, 60, 30);
+        pnlFormStudent.add(lblStreet);
+        lblStreet.setBounds(10, 130, 60, 30);
 
         lblDistrict.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblDistrict.setText("Bairro:");
-        jPanel1.add(lblDistrict);
-        lblDistrict.setBounds(10, 180, 53, 30);
+        pnlFormStudent.add(lblDistrict);
+        lblDistrict.setBounds(10, 170, 53, 30);
 
         lblNumber.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblNumber.setText("Nro:");
-        jPanel1.add(lblNumber);
-        lblNumber.setBounds(470, 140, 34, 30);
+        pnlFormStudent.add(lblNumber);
+        lblNumber.setBounds(470, 130, 34, 30);
 
         lblCep.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblCep.setText("Cep:");
-        jPanel1.add(lblCep);
-        lblCep.setBounds(10, 220, 38, 30);
+        pnlFormStudent.add(lblCep);
+        lblCep.setBounds(10, 210, 38, 30);
 
         lblState.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblState.setText("Estado:");
-        jPanel1.add(lblState);
-        lblState.setBounds(150, 220, 70, 30);
+        pnlFormStudent.add(lblState);
+        lblState.setBounds(150, 210, 70, 30);
 
         lblCity.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblCity.setText("Cidade:");
-        jPanel1.add(lblCity);
-        lblCity.setBounds(380, 220, 70, 30);
+        pnlFormStudent.add(lblCity);
+        lblCity.setBounds(380, 210, 70, 30);
 
         lblComplement.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblComplement.setText("Complemento:");
-        jPanel1.add(lblComplement);
-        lblComplement.setBounds(380, 180, 120, 30);
+        pnlFormStudent.add(lblComplement);
+        lblComplement.setBounds(380, 170, 120, 30);
 
         txtStreet.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jPanel1.add(txtStreet);
-        txtStreet.setBounds(70, 140, 390, 31);
+        pnlFormStudent.add(txtStreet);
+        txtStreet.setBounds(70, 130, 390, 31);
 
         txtNumber.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jPanel1.add(txtNumber);
-        txtNumber.setBounds(510, 140, 150, 31);
+        pnlFormStudent.add(txtNumber);
+        txtNumber.setBounds(510, 130, 150, 31);
 
         txtDistrict.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jPanel1.add(txtDistrict);
-        txtDistrict.setBounds(70, 180, 300, 31);
+        pnlFormStudent.add(txtDistrict);
+        txtDistrict.setBounds(70, 170, 300, 31);
 
         txtComplement.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jPanel1.add(txtComplement);
-        txtComplement.setBounds(500, 180, 160, 31);
+        pnlFormStudent.add(txtComplement);
+        txtComplement.setBounds(500, 170, 160, 31);
 
         try {
             txtCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
@@ -273,25 +296,163 @@ public class FormRegisterStudent extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtCep.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jPanel1.add(txtCep);
-        txtCep.setBounds(50, 220, 90, 31);
+        pnlFormStudent.add(txtCep);
+        txtCep.setBounds(50, 210, 90, 31);
 
         cbxState.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         cbxState.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SP", "RJ" }));
-        jPanel1.add(cbxState);
-        cbxState.setBounds(220, 220, 150, 31);
+        pnlFormStudent.add(cbxState);
+        cbxState.setBounds(220, 210, 150, 31);
 
         txtCity.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jPanel1.add(txtCity);
-        txtCity.setBounds(450, 220, 210, 31);
+        pnlFormStudent.add(txtCity);
+        txtCity.setBounds(450, 210, 210, 31);
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(10, 30, 780, 550);
+        tbdPnlStudent.addTab("Cadastro do Aluno", pnlFormStudent);
 
-        lblRegisterStudents.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        lblRegisterStudents.setText("Cadastro de Alunos");
-        getContentPane().add(lblRegisterStudents);
-        lblRegisterStudents.setBounds(10, 10, 200, 22);
+        lblModality.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblModality.setText("Modalidade 1:");
+
+        cbxModality.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        cbxModality.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxModalityActionPerformed(evt);
+            }
+        });
+
+        lblModality2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblModality2.setText("Modalidade 2:");
+
+        cbxModality2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        cbxModality2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxModality2ActionPerformed(evt);
+            }
+        });
+
+        lblPlan.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblPlan.setText("Tipo Plano:");
+
+        cbxPlan.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        cbxPlan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mensal", "Trimestral\t", "Semestral\t", "Anual" }));
+        cbxPlan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxPlanActionPerformed(evt);
+            }
+        });
+
+        lblPrice.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblPrice.setText("Valor:");
+
+        try {
+            txtPrice.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.00")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtPrice.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+
+        lblValid.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblValid.setText("Vencimento:");
+
+        try {
+            txtValid.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtValid.setText("  /  /    ");
+        txtValid.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+
+        pnlButtonsRegistration.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        btnSaveRegistration.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-Salvar Filled-50.png"))); // NOI18N
+        btnSaveRegistration.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveRegistrationActionPerformed(evt);
+            }
+        });
+        pnlButtonsRegistration.add(btnSaveRegistration);
+
+        btnUpdateRegistration.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-Editar-104.png"))); // NOI18N
+        btnUpdateRegistration.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateRegistrationActionPerformed(evt);
+            }
+        });
+        pnlButtonsRegistration.add(btnUpdateRegistration);
+
+        btnCancelRegistration.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-Cancelar-104.png"))); // NOI18N
+        btnCancelRegistration.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelRegistrationActionPerformed(evt);
+            }
+        });
+        pnlButtonsRegistration.add(btnCancelRegistration);
+
+        javax.swing.GroupLayout pnlStudentRegistrationLayout = new javax.swing.GroupLayout(pnlStudentRegistration);
+        pnlStudentRegistration.setLayout(pnlStudentRegistrationLayout);
+        pnlStudentRegistrationLayout.setHorizontalGroup(
+            pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlStudentRegistrationLayout.createSequentialGroup()
+                .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(pnlStudentRegistrationLayout.createSequentialGroup()
+                            .addComponent(lblPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(cbxPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlStudentRegistrationLayout.createSequentialGroup()
+                                .addComponent(lblModality, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbxModality, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlStudentRegistrationLayout.createSequentialGroup()
+                                .addComponent(lblModality2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbxModality2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(pnlStudentRegistrationLayout.createSequentialGroup()
+                        .addComponent(lblPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67)
+                        .addComponent(txtPrice))
+                    .addGroup(pnlStudentRegistrationLayout.createSequentialGroup()
+                        .addComponent(lblValid, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(txtValid)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlButtonsRegistration, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        pnlStudentRegistrationLayout.setVerticalGroup(
+            pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlStudentRegistrationLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlButtonsRegistration, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlStudentRegistrationLayout.createSequentialGroup()
+                        .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblModality, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbxModality, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblModality2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbxModality2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbxPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblValid, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtValid, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        tbdPnlStudent.addTab("Matricula", pnlStudentRegistration);
+
+        getContentPane().add(tbdPnlStudent);
+        tbdPnlStudent.setBounds(0, 0, 800, 600);
 
         setBounds(0, 0, 810, 630);
     }// </editor-fold>//GEN-END:initComponents
@@ -313,7 +474,9 @@ public class FormRegisterStudent extends javax.swing.JFrame {
             personMod.setCep(txtCep.getText().replace("-",""));
             personMod.setCity(txtCity.getText());
             personMod.setState((String)cbxState.getSelectedItem());
-            personCon.Save(personMod);
+            personMod.setComplement(txtComplement.getText());
+            studentMod.setSituation((String)cbxSituation.getSelectedItem());
+            studentCon.SaveStudent(personMod, studentMod);
             clearText();
             btnCancel.setEnabled(true);
             btnDelete.setEnabled(true);
@@ -331,7 +494,11 @@ public class FormRegisterStudent extends javax.swing.JFrame {
             personMod.setCep(txtCep.getText().replace("-",""));
             personMod.setCity(txtCity.getText());
             personMod.setState((String)cbxState.getSelectedItem());
+            personMod.setComplement(txtComplement.getText());
+            studentMod.setCpf(txtCpf.getText().replace(".","").replace("-",""));
+            studentMod.setSituation((String)cbxSituation.getSelectedItem());
             personCon.updatePerson(personMod);
+            studentCon.updateStudent(studentMod);
             disableText();
             btnCreate.setEnabled(false);
             btnSave.setEnabled(false);
@@ -343,7 +510,9 @@ public class FormRegisterStudent extends javax.swing.JFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
             personMod.setSearch(txtCpf.getText());
+            studentMod.setSearch(txtCpf.getText());
             PersonModel model = personCon.searchPerson(personMod);
+            StudentModel stmodel = studentCon.searchStudent(studentMod);
             txtCpf.setText(model.getCpf());
             //personMod.setPhone(txtPhone.getText());
             txtName.setText(model.getName());
@@ -355,6 +524,8 @@ public class FormRegisterStudent extends javax.swing.JFrame {
             txtCep.setText(model.getCep());
             txtCity.setText(model.getCity());
             cbxState.setSelectedItem(model.getState());
+            txtComplement.setText(model.getComplement());
+            cbxSituation.setSelectedItem(stmodel.getSituation());
             btnDelete.setEnabled(true);
             btnUpdate.setEnabled(true);
             btnCreate.setEnabled(false);
@@ -393,13 +564,37 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         question = JOptionPane.showConfirmDialog(rootPane, "Deseja relamente excluir os dados ?");
         if (question==JOptionPane.YES_OPTION){
             personMod.setCpf(txtCpf.getText().replace(".","").replace("-",""));
-            personCon.deletePerson(personMod);
+            studentCon.deleteStudent(personMod, studentMod);
             clearText();
             disableText();
             btnDelete.setEnabled(false);
         }
         
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void cbxModalityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxModalityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxModalityActionPerformed
+
+    private void cbxModality2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxModality2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxModality2ActionPerformed
+
+    private void cbxPlanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxPlanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxPlanActionPerformed
+
+    private void btnSaveRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveRegistrationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSaveRegistrationActionPerformed
+
+    private void btnUpdateRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateRegistrationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUpdateRegistrationActionPerformed
+
+    private void btnCancelRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelRegistrationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelRegistrationActionPerformed
     
     private void clearText (){
         txtCpf.setText("");
@@ -487,30 +682,43 @@ public class FormRegisterStudent extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnCancelRegistration;
     private javax.swing.JButton btnCreate;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnSaveRegistration;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton btnUpdateRegistration;
+    private javax.swing.JComboBox cbxModality;
+    private javax.swing.JComboBox cbxModality2;
+    private javax.swing.JComboBox cbxPlan;
     private javax.swing.JComboBox cbxSex;
     private javax.swing.JComboBox cbxSituation;
     private javax.swing.JComboBox<String> cbxState;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCep;
     private javax.swing.JLabel lblCity;
     private javax.swing.JLabel lblComplement;
     private javax.swing.JLabel lblCpf;
     private javax.swing.JLabel lblDistrict;
     private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblModality;
+    private javax.swing.JLabel lblModality2;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblNumber;
-    private javax.swing.JLabel lblRegisterStudents;
+    private javax.swing.JLabel lblPlan;
+    private javax.swing.JLabel lblPrice;
     private javax.swing.JLabel lblSex;
     private javax.swing.JLabel lblSituation;
     private javax.swing.JLabel lblState;
     private javax.swing.JLabel lblStreet;
     private javax.swing.JLabel lblTelephone;
+    private javax.swing.JLabel lblValid;
     private javax.swing.JPanel pnlButtons;
+    private javax.swing.JPanel pnlButtonsRegistration;
+    private javax.swing.JPanel pnlFormStudent;
+    private javax.swing.JPanel pnlStudentRegistration;
+    private javax.swing.JTabbedPane tbdPnlStudent;
     private javax.swing.JFormattedTextField txtCep;
     private javax.swing.JTextField txtCity;
     private javax.swing.JTextField txtComplement;
@@ -520,6 +728,8 @@ public class FormRegisterStudent extends javax.swing.JFrame {
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtNumber;
     private javax.swing.JFormattedTextField txtPhone;
+    private javax.swing.JFormattedTextField txtPrice;
     private javax.swing.JTextField txtStreet;
+    private javax.swing.JFormattedTextField txtValid;
     // End of variables declaration//GEN-END:variables
 }

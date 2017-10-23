@@ -12,6 +12,7 @@ num integer,
 cep varchar(9), 
 city varchar(30),  
 estado varchar(2),
+complement varchar(30),
 primary key (cpf));
 
 create table product (
@@ -43,10 +44,22 @@ create table monthly (
 cpf_student varchar(11),
 date_maturity date,
 price float,
-type varchar(50),
-plan varchar(50),
+type_plan varchar(50),
 primary key (cpf_student, date_maturity),
 foreign key (cpf_student) references student (cpf_student));
+
+create table person_email(
+cpf_email varchar(11),
+email varchar(30),
+primary_key (cpf_email, email),
+foreign key (cpf_email) references person (cpf));
+
+create table person_phone(
+cpf_phone varchar(11),
+phone varchar(30),
+primary key (cpf_phone, phone),
+foreign key (cpf_phone) references person (cpf));
+
 
 
 //sites uteis

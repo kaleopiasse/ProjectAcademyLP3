@@ -59,7 +59,7 @@ public class PersonDao {
         cntn.connection();
         try {
             PreparedStatement pst = cntn.conn.prepareStatement("update person set cpf=?,name=?,sex=?,street=?, district=?,num=?,"
-                    + "cep=?, city=?, estado=? where cpf=?");
+                    + "cep=?, city=?, estado=?, complement=? where cpf=?");
             pst.setString(1, personMod.getCpf());
             pst.setString(2, personMod.getName());
             pst.setString(3, personMod.getSex());
@@ -69,7 +69,8 @@ public class PersonDao {
             pst.setString(7, personMod.getCep());
             pst.setString(8, personMod.getCity());
             pst.setString(9, personMod.getState());
-            pst.setString(10, personMod.getCpf());
+            pst.setString(10, personMod.getComplement());
+            pst.setString(11, personMod.getCpf());
             pst.execute();
             JOptionPane.showMessageDialog(null,"Dados alterados com sucesso !!!");
         } catch (SQLException ex) {

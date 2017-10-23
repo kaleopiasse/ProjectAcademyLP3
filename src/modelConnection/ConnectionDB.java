@@ -6,8 +6,6 @@
 package modelConnection;
 
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -51,7 +49,7 @@ public class ConnectionDB {
             JOptionPane.showMessageDialog(null, "Desconectado da base de dados");
         }
         catch (SQLException ex){
-            JOptionPane.showMessageDialog(null, "Erro oa fechar a conexão com a base de dados\n" +ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao fechar a conexão com a base de dados\n" +ex.getMessage());
         }
     }
 }

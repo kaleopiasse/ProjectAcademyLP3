@@ -5,12 +5,17 @@
  */
 package view;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
+import modelBeans.ModalityModel;
+import modelBeans.MonthlyModel;
 import modelConnection.ConnectionDB;
 import modelBeans.PersonModel;
 import modelBeans.StudentModel;
+import modelDao.ModalityDao;
 import modelDao.MonthlyDao;
 import modelDao.PersonDao;
 import modelDao.StudentDao;
@@ -21,12 +26,19 @@ import modelDao.StudentDao;
  */
 public class FormRegisterStudent extends javax.swing.JFrame {
 
+    ConnectionDB cntn = new ConnectionDB();
     PersonModel personMod = new PersonModel();
     StudentModel studentMod = new StudentModel();
-    ConnectionDB cntn = new ConnectionDB();
+    MonthlyModel monthlyMod = new MonthlyModel();
+    ModalityModel modalityMod = new ModalityModel();
     PersonDao personCon = new PersonDao();
     StudentDao studentCon = new StudentDao();
+    MonthlyDao monthlyDao = new MonthlyDao();
+    ModalityDao modalityDao = new ModalityDao();
+    Date data = new Date (System.currentTimeMillis());
+    SimpleDateFormat dateFormat =  new SimpleDateFormat("ddMMyyyy");
     private int flagButton = 0;
+    private int flagButton2 = 0;
     
     public FormRegisterStudent() {
         initComponents();
@@ -36,6 +48,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         btnDelete.setEnabled(false);
         btnUpdate.setEnabled(false);
         setComboBox();
+        //txtDateRegistration.setText(dateFormat.format(dateFormat));
     }
 
     /**
@@ -97,6 +110,8 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         btnSaveRegistration = new javax.swing.JButton();
         btnUpdateRegistration = new javax.swing.JButton();
         btnCancelRegistration = new javax.swing.JButton();
+        lblRegistration = new javax.swing.JLabel();
+        txtDateRegistration = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Academia King Muay Thai");
@@ -313,6 +328,11 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         lblModality.setText("Modalidade 1:");
 
         cbxModality.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        cbxModality.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbxModalityMouseClicked(evt);
+            }
+        });
         cbxModality.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxModalityActionPerformed(evt);
@@ -386,65 +406,71 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         });
         pnlButtonsRegistration.add(btnCancelRegistration);
 
+        lblRegistration.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblRegistration.setText("Matricula:");
+
+        try {
+            txtDateRegistration.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtDateRegistration.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+
         javax.swing.GroupLayout pnlStudentRegistrationLayout = new javax.swing.GroupLayout(pnlStudentRegistration);
         pnlStudentRegistration.setLayout(pnlStudentRegistrationLayout);
         pnlStudentRegistrationLayout.setHorizontalGroup(
             pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlStudentRegistrationLayout.createSequentialGroup()
-                .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(pnlStudentRegistrationLayout.createSequentialGroup()
-                            .addComponent(lblPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(cbxPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlStudentRegistrationLayout.createSequentialGroup()
-                                .addComponent(lblModality, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbxModality, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlStudentRegistrationLayout.createSequentialGroup()
-                                .addComponent(lblModality2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbxModality2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(pnlStudentRegistrationLayout.createSequentialGroup()
-                        .addComponent(lblPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(67, 67, 67)
-                        .addComponent(txtPrice))
-                    .addGroup(pnlStudentRegistrationLayout.createSequentialGroup()
-                        .addComponent(lblValid, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(txtValid)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblValid, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblModality, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblRegistration, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblModality2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtPrice)
+                    .addComponent(txtValid)
+                    .addComponent(cbxPlan, 0, 140, Short.MAX_VALUE)
+                    .addComponent(txtDateRegistration)
+                    .addComponent(cbxModality, 0, 140, Short.MAX_VALUE)
+                    .addComponent(cbxModality2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 388, Short.MAX_VALUE)
                 .addComponent(pnlButtonsRegistration, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(22, 22, 22))
         );
         pnlStudentRegistrationLayout.setVerticalGroup(
             pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlStudentRegistrationLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlButtonsRegistration, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnlStudentRegistrationLayout.createSequentialGroup()
-                        .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblModality, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbxModality, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblModality2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbxModality2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbxPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblValid, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtValid, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblRegistration, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDateRegistration, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblModality, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxModality, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblModality2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxModality2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblValid, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtValid, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(340, Short.MAX_VALUE))
+            .addGroup(pnlStudentRegistrationLayout.createSequentialGroup()
+                .addComponent(pnlButtonsRegistration, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 84, Short.MAX_VALUE))
         );
 
         tbdPnlStudent.addTab("Matricula", pnlStudentRegistration);
@@ -544,8 +570,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         disableText();
         btnCreate.setEnabled(true);
         btnDelete.setEnabled(false);
-        btnSearch.setEnabled(true);
-        
+        btnSearch.setEnabled(true);  
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -598,7 +623,49 @@ public class FormRegisterStudent extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxPlanActionPerformed
 
     private void btnSaveRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveRegistrationActionPerformed
-        // TODO add your handling code here:
+        if (flagButton2==1){
+            monthlyMod.setDateRegistration(txtDateRegistration.getText());
+            monthlyMod.setPlan((String)cbxPlan.getSelectedItem());
+            monthlyMod.setPrice(Double.parseDouble(txtPrice.getText()));
+            //personMod.setEmail(txtEmail.getText());
+            personMod.setStreet(txtStreet.getText());
+            personMod.setDistrict(txtDistrict.getText());
+            personMod.setNum(Integer.parseInt(txtNumber.getText()));
+            personMod.setCep(txtCep.getText().replace("-",""));
+            personMod.setCity(txtCity.getText());
+            personMod.setState((String)cbxState.getSelectedItem());
+            personMod.setComplement(txtComplement.getText());
+            studentMod.setSituation((String)cbxSituation.getSelectedItem());
+            studentCon.saveStudent(personMod, studentMod);
+            clearText();
+            btnCancel.setEnabled(true);
+            btnDelete.setEnabled(true);
+            btnUpdate.setEnabled(true);
+        }
+        else {
+            personMod.setCpf(txtCpf.getText().replace(".","").replace("-",""));
+            //personMod.setPhone(txtPhone.getText());
+            personMod.setName(txtName.getText());
+            personMod.setSex((String)cbxSex.getSelectedItem());
+            //personMod.setEmail(txtEmail.getText());
+            personMod.setStreet(txtStreet.getText());
+            personMod.setDistrict(txtDistrict.getText());
+            personMod.setNum(Integer.parseInt(txtNumber.getText()));
+            personMod.setCep(txtCep.getText().replace("-",""));
+            personMod.setCity(txtCity.getText());
+            personMod.setState((String)cbxState.getSelectedItem());
+            personMod.setComplement(txtComplement.getText());
+            studentMod.setCpf(txtCpf.getText().replace(".","").replace("-",""));
+            studentMod.setSituation((String)cbxSituation.getSelectedItem());
+            personCon.updatePerson(personMod);
+            studentCon.updateStudent(studentMod);
+            disableText();
+            btnCreate.setEnabled(false);
+            btnSave.setEnabled(false);
+            btnCancel.setEnabled(true);
+            btnDelete.setEnabled(true);
+            btnUpdate.setEnabled(true);
+        }
     }//GEN-LAST:event_btnSaveRegistrationActionPerformed
 
     private void btnUpdateRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateRegistrationActionPerformed
@@ -608,6 +675,12 @@ public class FormRegisterStudent extends javax.swing.JFrame {
     private void btnCancelRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelRegistrationActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelRegistrationActionPerformed
+
+    private void cbxModalityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxModalityMouseClicked
+        modalityMod.setSearch((String)cbxModality.getSelectedItem());
+        modalityDao.searchModality(modalityMod);
+        txtPrice.setText(Double.toString(modalityMod.getPrice()));
+    }//GEN-LAST:event_cbxModalityMouseClicked
     
     private void clearText (){
         txtCpf.setText("");
@@ -721,6 +794,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
     private javax.swing.JLabel lblNumber;
     private javax.swing.JLabel lblPlan;
     private javax.swing.JLabel lblPrice;
+    private javax.swing.JLabel lblRegistration;
     private javax.swing.JLabel lblSex;
     private javax.swing.JLabel lblSituation;
     private javax.swing.JLabel lblState;
@@ -736,6 +810,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
     private javax.swing.JTextField txtCity;
     private javax.swing.JTextField txtComplement;
     private javax.swing.JFormattedTextField txtCpf;
+    private javax.swing.JFormattedTextField txtDateRegistration;
     private javax.swing.JTextField txtDistrict;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtName;

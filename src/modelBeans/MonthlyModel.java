@@ -13,7 +13,9 @@ public class MonthlyModel {
     
     private int id_monthly;
     private String cpf_student;
-    private String date;
+    private String dateRegistration;
+    private int numPortion;
+    private String datePortion;
     private double price;
     private String plan;
 
@@ -33,12 +35,12 @@ public class MonthlyModel {
         this.cpf_student = cpf_student;
     }
 
-    public String getDate() {
-        return date;
+    public String getDateRegistration() {
+        return dateRegistration;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setDateRegistration(String date) {
+        this.dateRegistration = date;
     }
 
     public double getPrice() {
@@ -56,4 +58,21 @@ public class MonthlyModel {
     public void setPlan(String plan) {
         this.plan = plan;
     }
+
+    public int getNumPortion() {
+        return numPortion;
+    }
+
+    public void setNumPortion(int numPortion) {
+        this.numPortion = numPortion;
+    }
+
+    public String getDatePortion() {
+        return datePortion;
+    }
+
+    public void setDatePortion(String datePortion) {
+        this.datePortion = datePortion;
+    }
+    
 }

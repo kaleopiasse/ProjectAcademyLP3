@@ -7,7 +7,6 @@ package modelDao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,13 +28,15 @@ public class MonthlyDao {
         
         cntn.connection();
         try {
-            PreparedStatement pst = cntn.conn.prepareStatement("insert into monthly (id_monthly, cpf_student,date,price,plan,) values (?,?,?)");
+            PreparedStatement pst = cntn.conn.prepareStatement("insert into monthly (id_monthly, cpf_student,date_registration,num_portion,date_portion,price,plan,) values (?,?,?,?,?,?,?)");
             studentCpf = studentMod.getCpf();
             pst.setInt(1, monthlyMod.getId_monthly());
             pst.setString(2,studentCpf);
-            pst.setString(2, monthlyMod.getDate());
-            pst.setDouble(3, monthlyMod.getPrice());
-            pst.setString(4, monthlyMod.getPlan());
+            pst.setString(3, monthlyMod.getDateRegistration());
+            pst.setInt(4, monthlyMod.getNumPortion());
+            pst.setString(5, monthlyMod.getDatePortion());
+            pst.setDouble(6, monthlyMod.getPrice());
+            pst.setString(7, monthlyMod.getPlan());
             JOptionPane.showMessageDialog(null,"Dados inseridos com sucesso !!!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Erro ao inserir os dados! \n" +ex);

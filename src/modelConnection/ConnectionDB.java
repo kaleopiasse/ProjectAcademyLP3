@@ -6,6 +6,7 @@
 package modelConnection;
 
 import java.sql.*;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -52,4 +53,17 @@ public class ConnectionDB {
             JOptionPane.showMessageDialog(null, "Erro ao fechar a conexão com a base de dados\n" +ex.getMessage());
         }
     }
+    
+    public ResultSet executeResult (String sql){
+        
+        try {
+            stm = conn.createStatement(rs.TYPE_SCROLL_INSENSITIVE, rs.CONCUR_READ_ONLY);
+            rs = stm.executeQuery(sql);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao executar SQL \n" +ex.getMessage());
+        }
+        
+        return rs;
+    }
+     
 }

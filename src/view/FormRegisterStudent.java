@@ -5,10 +5,13 @@
  */
 package view;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.JOptionPane;
 import modelConnection.ConnectionDB;
 import modelBeans.PersonModel;
 import modelBeans.StudentModel;
+import modelDao.MonthlyDao;
 import modelDao.PersonDao;
 import modelDao.StudentDao;
 
@@ -32,6 +35,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         btnSave.setEnabled(false);
         btnDelete.setEnabled(false);
         btnUpdate.setEnabled(false);
+        setComboBox();
     }
 
     /**
@@ -566,8 +570,23 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+    private void setComboBox (){
+        MonthlyDao monthlyDao = new MonthlyDao();
+        cbxModality.removeAllItems();
+        cbxModality2.removeAllItems();//remove os itens atuais do comboBox.
+        ArrayList produtos = monthlyDao.findAll(); //'produtoDAO' é meu objeto que retorna os produtos do banco.
+        Iterator i = produtos.iterator();
+        Iterator j = produtos.iterator();
+        while(i.hasNext()) {
+            cbxModality.addItem(String.valueOf(i.next()));
+        }
+        while(j.hasNext()) {
+            cbxModality2.addItem(String.valueOf(j.next()));
+        }
+    }
+    
     private void cbxModalityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxModalityActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_cbxModalityActionPerformed
 
     private void cbxModality2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxModality2ActionPerformed

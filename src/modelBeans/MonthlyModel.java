@@ -11,10 +11,19 @@ package modelBeans;
  */
 public class MonthlyModel {
     
+    private int id_monthly;
     private String cpf_student;
     private String date;
     private double price;
     private String plan;
+
+    public int getId_monthly() {
+        return id_monthly;
+    }
+
+    public void setId_monthly(int id_monthly) {
+        this.id_monthly = id_monthly;
+    }
 
     public String getCpf_student() {
         return cpf_student;

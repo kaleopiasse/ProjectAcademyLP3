@@ -5,7 +5,12 @@
  */
 package modelDao;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelBeans.MonthlyModel;
 import modelBeans.StudentModel;
@@ -24,9 +29,10 @@ public class MonthlyDao {
         
         cntn.connection();
         try {
-            PreparedStatement pst = cntn.conn.prepareStatement("insert into monthly (cpf_student,date,price,plan,) values (?,?,?)");
-            studentCpf=studentMod.getCpf();
-            pst.setString(1,studentCpf);
+            PreparedStatement pst = cntn.conn.prepareStatement("insert into monthly (id_monthly, cpf_student,date,price,plan,) values (?,?,?)");
+            studentCpf = studentMod.getCpf();
+            pst.setInt(1, monthlyMod.getId_monthly());
+            pst.setString(2,studentCpf);
             pst.setString(2, monthlyMod.getDate());
             pst.setDouble(3, monthlyMod.getPrice());
             pst.setString(4, monthlyMod.getPlan());
@@ -37,7 +43,7 @@ public class MonthlyDao {
         cntn.desconnection();
     }
     
-    public void deletemonthly (MonthlyModel personMod, StudentModel studentMod){
+    /*public void deletemonthly (MonthlyModel personMod, StudentModel studentMod){
         String studentCpf;
         cntn.connection();
         try {
@@ -54,7 +60,7 @@ public class MonthlyDao {
             JOptionPane.showMessageDialog(null,"Erro ao excluir os dados! \n" +ex);
         }
         cntn.desconnection();
-    }
+    }*/
     
     public StudentModel searchStudent (StudentModel studentMod){
         cntn.connection();
@@ -82,5 +88,22 @@ public class MonthlyDao {
             JOptionPane.showMessageDialog(null,"Erro ao alterar os dados! \n Erro:" +ex);
         }
         cntn.desconnection(); 
+    }
+    
+    public ArrayList findAll(){
+        cntn.connection();
+        ResultSet resultSet;
+        ArrayList list = new ArrayList();
+        try {
+            resultSet = cntn.executeResult("select name from modality");
+                while ( resultSet.next() ) {
+                    list.add(resultSet.getString("name")); 
+                }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(MonthlyDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        cntn.desconnection();
+        return list;  
     }
 }

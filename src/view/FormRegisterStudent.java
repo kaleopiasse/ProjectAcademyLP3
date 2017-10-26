@@ -48,7 +48,8 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         btnDelete.setEnabled(false);
         btnUpdate.setEnabled(false);
         setComboBox();
-        //txtDateRegistration.setText(dateFormat.format(dateFormat));
+        txtDateRegistration.setText(dateFormat.format(data));
+        txtValid.setText(dateFormat.format(data));
     }
 
     /**
@@ -93,7 +94,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         txtDistrict = new javax.swing.JTextField();
         txtComplement = new javax.swing.JTextField();
         txtCep = new javax.swing.JFormattedTextField();
-        cbxState = new javax.swing.JComboBox<String>();
+        cbxState = new javax.swing.JComboBox<>();
         txtCity = new javax.swing.JTextField();
         pnlStudentRegistration = new javax.swing.JPanel();
         lblModality = new javax.swing.JLabel();
@@ -115,7 +116,6 @@ public class FormRegisterStudent extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Academia King Muay Thai");
-        setPreferredSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(null);
 
         tbdPnlStudent.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -290,19 +290,19 @@ public class FormRegisterStudent extends javax.swing.JFrame {
 
         txtStreet.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         pnlFormStudent.add(txtStreet);
-        txtStreet.setBounds(70, 130, 390, 25);
+        txtStreet.setBounds(70, 130, 390, 31);
 
         txtNumber.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         pnlFormStudent.add(txtNumber);
-        txtNumber.setBounds(510, 130, 150, 25);
+        txtNumber.setBounds(510, 130, 150, 31);
 
         txtDistrict.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         pnlFormStudent.add(txtDistrict);
-        txtDistrict.setBounds(70, 170, 300, 25);
+        txtDistrict.setBounds(70, 170, 300, 31);
 
         txtComplement.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         pnlFormStudent.add(txtComplement);
-        txtComplement.setBounds(500, 170, 160, 25);
+        txtComplement.setBounds(500, 170, 160, 31);
 
         try {
             txtCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
@@ -311,16 +311,16 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         }
         txtCep.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         pnlFormStudent.add(txtCep);
-        txtCep.setBounds(50, 210, 90, 25);
+        txtCep.setBounds(50, 210, 90, 31);
 
         cbxState.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        cbxState.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SP", "RJ" }));
+        cbxState.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SP", "RJ" }));
         pnlFormStudent.add(cbxState);
-        cbxState.setBounds(220, 210, 150, 25);
+        cbxState.setBounds(220, 210, 150, 31);
 
         txtCity.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         pnlFormStudent.add(txtCity);
-        txtCity.setBounds(450, 210, 210, 25);
+        txtCity.setBounds(450, 210, 210, 31);
 
         tbdPnlStudent.addTab("Cadastro do Aluno", pnlFormStudent);
 
@@ -328,6 +328,11 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         lblModality.setText("Modalidade 1:");
 
         cbxModality.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        cbxModality.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxModalityItemStateChanged(evt);
+            }
+        });
         cbxModality.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cbxModalityMouseClicked(evt);
@@ -421,6 +426,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         pnlStudentRegistrationLayout.setHorizontalGroup(
             pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlStudentRegistrationLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblValid, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -432,11 +438,11 @@ public class FormRegisterStudent extends javax.swing.JFrame {
                 .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(txtPrice)
                     .addComponent(txtValid)
-                    .addComponent(cbxPlan, 0, 140, Short.MAX_VALUE)
+                    .addComponent(cbxPlan, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtDateRegistration)
-                    .addComponent(cbxModality, 0, 140, Short.MAX_VALUE)
-                    .addComponent(cbxModality2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 388, Short.MAX_VALUE)
+                    .addComponent(cbxModality, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbxModality2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 361, Short.MAX_VALUE)
                 .addComponent(pnlButtonsRegistration, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
         );
@@ -470,7 +476,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
                 .addContainerGap(340, Short.MAX_VALUE))
             .addGroup(pnlStudentRegistrationLayout.createSequentialGroup()
                 .addComponent(pnlButtonsRegistration, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 84, Short.MAX_VALUE))
+                .addGap(0, 78, Short.MAX_VALUE))
         );
 
         tbdPnlStudent.addTab("Matricula", pnlStudentRegistration);
@@ -677,10 +683,14 @@ public class FormRegisterStudent extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelRegistrationActionPerformed
 
     private void cbxModalityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxModalityMouseClicked
+        
+    }//GEN-LAST:event_cbxModalityMouseClicked
+
+    private void cbxModalityItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxModalityItemStateChanged
         modalityMod.setSearch((String)cbxModality.getSelectedItem());
         modalityDao.searchModality(modalityMod);
         txtPrice.setText(Double.toString(modalityMod.getPrice()));
-    }//GEN-LAST:event_cbxModalityMouseClicked
+    }//GEN-LAST:event_cbxModalityItemStateChanged
     
     private void clearText (){
         txtCpf.setText("");

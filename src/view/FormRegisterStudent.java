@@ -21,10 +21,6 @@ import modelDao.MonthlyDao;
 import modelDao.PersonDao;
 import modelDao.StudentDao;
 
-/**
- *
- * @author kaleo
- */
 public class FormRegisterStudent extends javax.swing.JFrame {
 
     ConnectionDB cntn = new ConnectionDB();
@@ -48,7 +44,8 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         btnSave.setEnabled(false);
         btnDelete.setEnabled(false);
         btnUpdate.setEnabled(false);
-        setComboBox();
+        setCbxmodality();
+        setCbxmodality2();
         txtDateRegistration.setText(dateFormat.format(data));
         txtValid.setText(dateFormat.format(data));
     }
@@ -607,19 +604,26 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnDeleteActionPerformed
 
-    private void setComboBox (){
+    private void setCbxmodality (){
         MonthlyDao monthlyDao = new MonthlyDao();
         cbxModality.removeAllItems();
-        cbxModality2.removeAllItems();//remove os itens atuais do comboBox.
-        ArrayList produtos = monthlyDao.findAll(); //'produtoDAO' é meu objeto que retorna os produtos do banco.
+        ArrayList produtos = monthlyDao.findAll(); //'monthlyDAO' é meu objeto que retorna os produtos do banco.
         Iterator i = produtos.iterator();
-        Iterator j = produtos.iterator();
         while(i.hasNext()) {
             cbxModality.addItem(String.valueOf(i.next()));
         }
+        //cbxModality.setSelectedIndex(0);
+    }
+    
+    private void setCbxmodality2 (){
+        MonthlyDao monthlyDao = new MonthlyDao();
+        cbxModality2.removeAllItems();//remove os itens atuais do comboBox.
+        ArrayList produtos = monthlyDao.findAll(); //'monthlyDAO' é meu objeto que retorna os produtos do banco.
+        Iterator j = produtos.iterator();
         while(j.hasNext()) {
             cbxModality2.addItem(String.valueOf(j.next()));
         }
+        //cbxModality2.setSelectedIndex(0);
     }
     
     private void cbxModalityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxModalityActionPerformed
@@ -699,6 +703,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
             txtPrice.setText(Double.toString(modalityMod.getPrice()));
         }
         else{
+            setCbxmodality2();
             int index = cbxModality.getSelectedIndex();
             cbxModality2.removeItemAt(index);
         } 
@@ -757,9 +762,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         btnDelete.setEnabled(false);
         btnUpdate.setEnabled(false);
     } 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

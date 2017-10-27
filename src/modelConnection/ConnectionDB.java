@@ -27,7 +27,7 @@ public class ConnectionDB {
         try{
             System.setProperty("jdbc.Drivers", driver);
             conn = DriverManager.getConnection(path,user,password);
-            JOptionPane.showMessageDialog(null, "Conexão Efetuada com sucesso !!!");
+            //JOptionPane.showMessageDialog(null, "Conexão Efetuada com sucesso !!!");
         } 
         catch (SQLException ex){
             JOptionPane.showMessageDialog(null, "Erro ao tentar conectar com o banco de dados\n"+ex.getMessage());
@@ -47,7 +47,7 @@ public class ConnectionDB {
     public void desconnection(){
         try{
             conn.close();
-            JOptionPane.showMessageDialog(null, "Desconectado da base de dados");
+            //OptionPane.showMessageDialog(null, "Desconectado da base de dados");
         }
         catch (SQLException ex){
             JOptionPane.showMessageDialog(null, "Erro ao fechar a conexão com a base de dados\n" +ex.getMessage());

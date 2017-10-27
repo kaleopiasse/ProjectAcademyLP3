@@ -5,6 +5,7 @@
  */
 package view;
 
+import java.awt.event.ItemEvent;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -348,6 +349,11 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         lblModality2.setText("Modalidade 2:");
 
         cbxModality2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        cbxModality2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxModality2ItemStateChanged(evt);
+            }
+        });
         cbxModality2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxModality2ActionPerformed(evt);
@@ -687,10 +693,20 @@ public class FormRegisterStudent extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxModalityMouseClicked
 
     private void cbxModalityItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxModalityItemStateChanged
-        modalityMod.setSearch((String)cbxModality.getSelectedItem());
-        modalityDao.searchModality(modalityMod);
-        txtPrice.setText(Double.toString(modalityMod.getPrice()));
+        if(evt.getStateChange() == 1){
+            modalityMod.setSearch((String)cbxModality.getSelectedItem());
+            modalityDao.searchModality(modalityMod);
+            txtPrice.setText(Double.toString(modalityMod.getPrice()));
+        }
+        else{
+            int index = cbxModality.getSelectedIndex();
+            cbxModality2.removeItemAt(index);
+        } 
     }//GEN-LAST:event_cbxModalityItemStateChanged
+
+    private void cbxModality2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxModality2ItemStateChanged
+
+    }//GEN-LAST:event_cbxModality2ItemStateChanged
     
     private void clearText (){
         txtCpf.setText("");

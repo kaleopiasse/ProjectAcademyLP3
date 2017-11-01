@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ItemEvent;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -92,7 +89,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         txtDistrict = new javax.swing.JTextField();
         txtComplement = new javax.swing.JTextField();
         txtCep = new javax.swing.JFormattedTextField();
-        cbxState = new javax.swing.JComboBox<>();
+        cbxState = new javax.swing.JComboBox<String>();
         txtCity = new javax.swing.JTextField();
         pnlStudentRegistration = new javax.swing.JPanel();
         lblModality = new javax.swing.JLabel();
@@ -288,19 +285,19 @@ public class FormRegisterStudent extends javax.swing.JFrame {
 
         txtStreet.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         pnlFormStudent.add(txtStreet);
-        txtStreet.setBounds(70, 130, 390, 31);
+        txtStreet.setBounds(70, 130, 390, 25);
 
         txtNumber.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         pnlFormStudent.add(txtNumber);
-        txtNumber.setBounds(510, 130, 150, 31);
+        txtNumber.setBounds(510, 130, 150, 25);
 
         txtDistrict.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         pnlFormStudent.add(txtDistrict);
-        txtDistrict.setBounds(70, 170, 300, 31);
+        txtDistrict.setBounds(70, 170, 300, 25);
 
         txtComplement.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         pnlFormStudent.add(txtComplement);
-        txtComplement.setBounds(500, 170, 160, 31);
+        txtComplement.setBounds(500, 170, 160, 25);
 
         try {
             txtCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
@@ -309,16 +306,16 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         }
         txtCep.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         pnlFormStudent.add(txtCep);
-        txtCep.setBounds(50, 210, 90, 31);
+        txtCep.setBounds(50, 210, 90, 25);
 
         cbxState.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        cbxState.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SP", "RJ" }));
+        cbxState.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SP", "RJ" }));
         pnlFormStudent.add(cbxState);
-        cbxState.setBounds(220, 210, 150, 31);
+        cbxState.setBounds(220, 210, 150, 25);
 
         txtCity.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         pnlFormStudent.add(txtCity);
-        txtCity.setBounds(450, 210, 210, 31);
+        txtCity.setBounds(450, 210, 210, 25);
 
         tbdPnlStudent.addTab("Cadastro do Aluno", pnlFormStudent);
 
@@ -612,7 +609,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         while(i.hasNext()) {
             cbxModality.addItem(String.valueOf(i.next()));
         }
-        //cbxModality.setSelectedIndex(0);
+        cbxModality.setSelectedIndex(0);
     }
     
     private void setCbxmodality2 (){
@@ -623,7 +620,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         while(j.hasNext()) {
             cbxModality2.addItem(String.valueOf(j.next()));
         }
-        //cbxModality2.setSelectedIndex(0);
+        cbxModality2.setSelectedIndex(1);
     }
     
     private void cbxModalityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxModalityActionPerformed

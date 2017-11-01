@@ -18,6 +18,7 @@ public class MainScreen extends javax.swing.JFrame {
     public MainScreen() {
         initComponents();
         setLocationRelativeTo(null);
+        this.setExtendedState(MAXIMIZED_BOTH);
         connection.connection(); 
     }
 
@@ -92,7 +93,8 @@ public class MainScreen extends javax.swing.JFrame {
             .addGap(0, 281, Short.MAX_VALUE)
         );
 
-        setBounds(0, 0, 410, 330);
+        setSize(new java.awt.Dimension(410, 330));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmiAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAlunoActionPerformed

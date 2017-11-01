@@ -39,6 +39,7 @@
         </Property>
       </Properties>
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTabbedPane()"/>
         <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="FormRegisterStudent_tbdPnlStudent"/>
       </AuxValues>
       <Constraints>

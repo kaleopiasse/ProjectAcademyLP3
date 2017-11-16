@@ -33,6 +33,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
     SimpleDateFormat dateFormat =  new SimpleDateFormat("ddMMyyyy");
     private int flagButton = 0;
     private int flagButton2 = 0;
+    private double price1, price2;
     
     public FormRegisterStudent() {
         initComponents();
@@ -89,7 +90,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         txtDistrict = new javax.swing.JTextField();
         txtComplement = new javax.swing.JTextField();
         txtCep = new javax.swing.JFormattedTextField();
-        cbxState = new javax.swing.JComboBox<String>();
+        cbxState = new javax.swing.JComboBox<>();
         txtCity = new javax.swing.JTextField();
         pnlStudentRegistration = new javax.swing.JPanel();
         lblModality = new javax.swing.JLabel();
@@ -309,7 +310,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         txtCep.setBounds(50, 210, 90, 25);
 
         cbxState.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        cbxState.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SP", "RJ" }));
+        cbxState.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SP", "RJ" }));
         pnlFormStudent.add(cbxState);
         cbxState.setBounds(220, 210, 150, 25);
 
@@ -368,11 +369,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         lblPrice.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblPrice.setText("Valor:");
 
-        try {
-            txtPrice.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.00")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        txtPrice.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtPrice.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
 
         lblValid.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -697,7 +694,8 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         if(evt.getStateChange() == 1){
             modalityMod.setSearch((String)cbxModality.getSelectedItem());
             modalityDao.searchModality(modalityMod);
-            txtPrice.setText(Double.toString(modalityMod.getPrice()));
+            price1 = modalityMod.getPrice();
+            txtPrice.setText(Double.toString(price1+price2));
         }
         else{
             setCbxmodality2();
@@ -707,7 +705,10 @@ public class FormRegisterStudent extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxModalityItemStateChanged
 
     private void cbxModality2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxModality2ItemStateChanged
-
+        modalityMod.setSearch((String)cbxModality2.getSelectedItem());
+        modalityDao.searchModality(modalityMod);
+        price2 = modalityMod.getPrice();
+        txtPrice.setText(Double.toString(price1+price2));
     }//GEN-LAST:event_cbxModality2ItemStateChanged
     
     private void clearText (){

@@ -4,10 +4,12 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ItemEvent;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import modelBeans.ModalityModel;
 import modelBeans.MonthlyModel;
 import modelConnection.ConnectionDB;
@@ -46,6 +48,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         setCbxmodality2();
         txtDateRegistration.setText(dateFormat.format(data));
         txtValid.setText(dateFormat.format(data));
+        fillTableStudent();
     }
 
     /**
@@ -92,6 +95,8 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         txtCep = new javax.swing.JFormattedTextField();
         cbxState = new javax.swing.JComboBox<>();
         txtCity = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblStudents = new javax.swing.JTable();
         pnlStudentRegistration = new javax.swing.JPanel();
         lblModality = new javax.swing.JLabel();
         cbxModality = new javax.swing.JComboBox();
@@ -317,6 +322,27 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         txtCity.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         pnlFormStudent.add(txtCity);
         txtCity.setBounds(450, 210, 210, 25);
+
+        tblStudents.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "CPF", "Nome"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblStudents);
+
+        pnlFormStudent.add(jScrollPane1);
+        jScrollPane1.setBounds(10, 250, 650, 300);
 
         tbdPnlStudent.addTab("Cadastro do Aluno", pnlFormStudent);
 
@@ -710,7 +736,28 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         price2 = modalityMod.getPrice();
         txtPrice.setText(Double.toString(price1+price2));
     }//GEN-LAST:event_cbxModality2ItemStateChanged
-    
+
+    public void fillTableStudent (){
+        try {
+            cntn.connection();
+            cntn.executeSql("select *from person");
+            DefaultTableModel tableModel = (DefaultTableModel) tblStudents.getModel();
+            
+            tableModel.setNumRows(0);
+            
+            while(cntn.rs.next()){
+                tableModel.addRow(new Object[]
+                {
+                    cntn.rs.getString("cpf"),
+                    cntn.rs.getString("name"),
+                });   
+            }
+        } 
+        catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro "+ex.getMessage());
+        }
+        cntn.desconnection();
+    }
     private void clearText (){
         txtCpf.setText("");
         txtName.setText("");
@@ -809,6 +856,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
     private javax.swing.JComboBox cbxSex;
     private javax.swing.JComboBox cbxSituation;
     private javax.swing.JComboBox<String> cbxState;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCep;
     private javax.swing.JLabel lblCity;
     private javax.swing.JLabel lblComplement;
@@ -833,6 +881,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
     private javax.swing.JPanel pnlFormStudent;
     private javax.swing.JPanel pnlStudentRegistration;
     private javax.swing.JTabbedPane tbdPnlStudent;
+    private javax.swing.JTable tblStudents;
     private javax.swing.JFormattedTextField txtCep;
     private javax.swing.JTextField txtCity;
     private javax.swing.JTextField txtComplement;

@@ -16,10 +16,7 @@ import modelDao.MonthlyDao;
  */
 public class RegistrationController {
     
-    MonthlyModel monthlyMod = new MonthlyModel();
-    MonthlyDao monthlyDao = new MonthlyDao();
-    ModalityModel modalityMod = new ModalityModel();
-    ModalityDao modalityDao = new ModalityDao();
+    private MonthlyModel [] monthlys;
     
     
 }

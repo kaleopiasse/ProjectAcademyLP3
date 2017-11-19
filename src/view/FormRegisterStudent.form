@@ -210,7 +210,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="670" y="10" width="100" height="480"/>
+                  <AbsoluteConstraints x="670" y="10" width="100" height="540"/>
                 </Constraint>
               </Constraints>
 
@@ -564,7 +564,7 @@
             </Container>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="pnlStudentRegistration">
+        <Container class="javax.swing.JPanel" name="pnlStudentMonthly">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Matricula">
@@ -579,23 +579,29 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblPrice" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
-                          <Component id="lblValid" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
-                          <Component id="lblPlan" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                          <Component id="lblModality" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                          <Component id="lblRegistration" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
-                          <Component id="lblModality2" min="-2" pref="115" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblPrice" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
+                                  <Component id="lblValid" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
+                                  <Component id="lblPlan" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="lblModality" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="lblRegistration" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
+                                  <Component id="lblModality2" min="-2" pref="115" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="txtPrice" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="txtValid" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="cbxPlan" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="txtDateRegistration" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="cbxModality" max="32767" attributes="0"/>
+                                  <Component id="cbxModality2" min="-2" pref="140" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="368" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="jScrollPane2" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="txtPrice" alignment="1" max="32767" attributes="0"/>
-                          <Component id="txtValid" alignment="1" max="32767" attributes="0"/>
-                          <Component id="cbxPlan" alignment="1" max="32767" attributes="0"/>
-                          <Component id="txtDateRegistration" alignment="1" max="32767" attributes="0"/>
-                          <Component id="cbxModality" max="32767" attributes="0"/>
-                          <Component id="cbxModality2" min="-2" pref="140" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="361" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="pnlButtonsRegistration" min="-2" pref="100" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
@@ -604,41 +610,44 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblRegistration" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="txtDateRegistration" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="pnlButtonsRegistration" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblRegistration" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Component id="txtDateRegistration" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblModality" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Component id="cbxModality" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblModality2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Component id="cbxModality2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblPlan" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Component id="cbxPlan" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblPrice" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Component id="txtPrice" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblValid" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Component id="txtValid" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jScrollPane2" min="-2" pref="309" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblModality" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="cbxModality" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblModality2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="cbxModality2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblPlan" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="cbxPlan" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblPrice" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="txtPrice" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblValid" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="txtValid" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="340" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="pnlButtonsRegistration" min="-2" pref="480" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="78" max="32767" attributes="0"/>
+                      <EmptySpace pref="13" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -762,14 +771,14 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JButton" name="btnSaveRegistration">
+                <Component class="javax.swing.JButton" name="btnSaveRegistrationMonthly">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/images/icons8-Salvar Filled-50.png"/>
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveRegistrationActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveRegistrationMonthlyActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnUpdateRegistration">
@@ -812,6 +821,27 @@
                 </Property>
               </Properties>
             </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTable" name="jTable1">
+                  <Properties>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                      <Table columnCount="4" rowCount="4">
+                        <Column editable="true" title="Title 1" type="java.lang.Object"/>
+                        <Column editable="true" title="Title 2" type="java.lang.Object"/>
+                        <Column editable="true" title="Title 3" type="java.lang.Object"/>
+                        <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                      </Table>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
       </SubComponents>

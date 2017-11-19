@@ -14,6 +14,8 @@ public class MonthlyModel {
     private int id_monthly;
     private String cpf_student;
     private String dateRegistration;
+    private ModalityModel modality1;
+    private ModalityModel modality2;
     private int numPortion;
     private String datePortion;
     private double price;

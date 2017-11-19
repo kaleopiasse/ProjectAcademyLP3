@@ -75,7 +75,7 @@ insert into student (cpf_student, situation)
 			  ("39958446858","Bloqueado"),
 			  ("39958446859","Inativo");
 
-insert into modality (name,price) values ("Muay Thai",75.00), ("Kung Fu",75.00), ("Boxe",75.00), ("Musculação",65.00), ("MMA",95.00);
+insert into modality (name,price) values ("",0.00), ("Muay Thai",75.00), ("Kung Fu",75.00), ("Boxe",75.00), ("Musculação",65.00), ("MMA",95.00);
 
 //sites uteis
 // https://pt.icons8.com/icon/set/login/win8

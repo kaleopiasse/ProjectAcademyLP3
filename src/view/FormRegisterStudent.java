@@ -49,6 +49,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         txtDateRegistration.setText(dateFormat.format(data));
         txtValid.setText(dateFormat.format(data));
         fillTableStudent();
+        tbdPnlStudent.setEnabledAt(1, false);
     }
 
     /**
@@ -97,7 +98,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         txtCity = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblStudents = new javax.swing.JTable();
-        pnlStudentRegistration = new javax.swing.JPanel();
+        pnlStudentMonthly = new javax.swing.JPanel();
         lblModality = new javax.swing.JLabel();
         cbxModality = new javax.swing.JComboBox();
         lblModality2 = new javax.swing.JLabel();
@@ -109,11 +110,13 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         lblValid = new javax.swing.JLabel();
         txtValid = new javax.swing.JFormattedTextField();
         pnlButtonsRegistration = new javax.swing.JPanel();
-        btnSaveRegistration = new javax.swing.JButton();
+        btnSaveRegistrationMonthly = new javax.swing.JButton();
         btnUpdateRegistration = new javax.swing.JButton();
         btnCancelRegistration = new javax.swing.JButton();
         lblRegistration = new javax.swing.JLabel();
         txtDateRegistration = new javax.swing.JFormattedTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Academia King Muay Thai");
@@ -227,7 +230,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         pnlButtons.add(btnSearch);
 
         pnlFormStudent.add(pnlButtons);
-        pnlButtons.setBounds(670, 10, 100, 480);
+        pnlButtons.setBounds(670, 10, 100, 540);
 
         cbxSituation.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         cbxSituation.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ativo", "Inativo", "Bloqueado" }));
@@ -410,13 +413,13 @@ public class FormRegisterStudent extends javax.swing.JFrame {
 
         pnlButtonsRegistration.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        btnSaveRegistration.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-Salvar Filled-50.png"))); // NOI18N
-        btnSaveRegistration.addActionListener(new java.awt.event.ActionListener() {
+        btnSaveRegistrationMonthly.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-Salvar Filled-50.png"))); // NOI18N
+        btnSaveRegistrationMonthly.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveRegistrationActionPerformed(evt);
+                btnSaveRegistrationMonthlyActionPerformed(evt);
             }
         });
-        pnlButtonsRegistration.add(btnSaveRegistration);
+        pnlButtonsRegistration.add(btnSaveRegistrationMonthly);
 
         btnUpdateRegistration.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-Editar-104.png"))); // NOI18N
         btnUpdateRegistration.addActionListener(new java.awt.event.ActionListener() {
@@ -444,65 +447,84 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         }
         txtDateRegistration.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
 
-        javax.swing.GroupLayout pnlStudentRegistrationLayout = new javax.swing.GroupLayout(pnlStudentRegistration);
-        pnlStudentRegistration.setLayout(pnlStudentRegistrationLayout);
-        pnlStudentRegistrationLayout.setHorizontalGroup(
-            pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlStudentRegistrationLayout.createSequentialGroup()
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
+        javax.swing.GroupLayout pnlStudentMonthlyLayout = new javax.swing.GroupLayout(pnlStudentMonthly);
+        pnlStudentMonthly.setLayout(pnlStudentMonthlyLayout);
+        pnlStudentMonthlyLayout.setHorizontalGroup(
+            pnlStudentMonthlyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlStudentMonthlyLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblValid, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblModality, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblRegistration, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblModality2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txtPrice)
-                    .addComponent(txtValid)
-                    .addComponent(cbxPlan, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtDateRegistration)
-                    .addComponent(cbxModality, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbxModality2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 361, Short.MAX_VALUE)
+                .addGroup(pnlStudentMonthlyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlStudentMonthlyLayout.createSequentialGroup()
+                        .addGroup(pnlStudentMonthlyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblValid, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblModality, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblRegistration, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblModality2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(22, 22, 22)
+                        .addGroup(pnlStudentMonthlyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtPrice)
+                            .addComponent(txtValid)
+                            .addComponent(cbxPlan, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtDateRegistration)
+                            .addComponent(cbxModality, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbxModality2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 368, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlButtonsRegistration, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
         );
-        pnlStudentRegistrationLayout.setVerticalGroup(
-            pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlStudentRegistrationLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblRegistration, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDateRegistration, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblModality, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxModality, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblModality2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxModality2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlStudentRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblValid, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtValid, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(340, Short.MAX_VALUE))
-            .addGroup(pnlStudentRegistrationLayout.createSequentialGroup()
-                .addComponent(pnlButtonsRegistration, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 78, Short.MAX_VALUE))
+        pnlStudentMonthlyLayout.setVerticalGroup(
+            pnlStudentMonthlyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlStudentMonthlyLayout.createSequentialGroup()
+                .addGroup(pnlStudentMonthlyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(pnlButtonsRegistration, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlStudentMonthlyLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(pnlStudentMonthlyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblRegistration, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDateRegistration, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlStudentMonthlyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblModality, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbxModality, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlStudentMonthlyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblModality2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbxModality2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlStudentMonthlyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbxPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlStudentMonthlyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlStudentMonthlyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblValid, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtValid, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        tbdPnlStudent.addTab("Matricula", pnlStudentRegistration);
+        tbdPnlStudent.addTab("Matricula", pnlStudentMonthly);
 
         getContentPane().add(tbdPnlStudent);
         tbdPnlStudent.setBounds(0, 0, 800, 600);
@@ -534,6 +556,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
             btnCancel.setEnabled(true);
             btnDelete.setEnabled(true);
             btnUpdate.setEnabled(true);
+            tbdPnlStudent.setEnabledAt(1, true);
         }
         else {
             personMod.setCpf(txtCpf.getText().replace(".","").replace("-",""));
@@ -558,6 +581,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
             btnCancel.setEnabled(true);
             btnDelete.setEnabled(true);
             btnUpdate.setEnabled(true);
+            tbdPnlStudent.setEnabledAt(1, true);
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
@@ -582,6 +606,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
             btnDelete.setEnabled(true);
             btnUpdate.setEnabled(true);
             btnCreate.setEnabled(false);
+            tbdPnlStudent.setEnabledAt(1, true);
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
@@ -599,7 +624,8 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         disableText();
         btnCreate.setEnabled(true);
         btnDelete.setEnabled(false);
-        btnSearch.setEnabled(true);  
+        btnSearch.setEnabled(true);
+        tbdPnlStudent.setEnabledAt(1, false);
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -608,6 +634,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         btnSave.setEnabled(true);
         btnDelete.setEnabled(false);
         btnSearch.setEnabled(false);
+        tbdPnlStudent.setEnabledAt(1, true);
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -620,6 +647,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
             clearText();
             disableText();
             btnDelete.setEnabled(false);
+            tbdPnlStudent.setEnabledAt(1, false);
         }
         
     }//GEN-LAST:event_btnDeleteActionPerformed
@@ -658,7 +686,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxPlanActionPerformed
 
-    private void btnSaveRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveRegistrationActionPerformed
+    private void btnSaveRegistrationMonthlyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveRegistrationMonthlyActionPerformed
         if (flagButton2==1){
             monthlyMod.setDateRegistration(txtDateRegistration.getText());
             monthlyMod.setPlan((String)cbxPlan.getSelectedItem());
@@ -702,7 +730,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
             btnDelete.setEnabled(true);
             btnUpdate.setEnabled(true);
         }
-    }//GEN-LAST:event_btnSaveRegistrationActionPerformed
+    }//GEN-LAST:event_btnSaveRegistrationMonthlyActionPerformed
 
     private void btnUpdateRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateRegistrationActionPerformed
         // TODO add your handling code here:
@@ -846,7 +874,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
     private javax.swing.JButton btnCreate;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
-    private javax.swing.JButton btnSaveRegistration;
+    private javax.swing.JButton btnSaveRegistrationMonthly;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnUpdateRegistration;
@@ -857,6 +885,8 @@ public class FormRegisterStudent extends javax.swing.JFrame {
     private javax.swing.JComboBox cbxSituation;
     private javax.swing.JComboBox<String> cbxState;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblCep;
     private javax.swing.JLabel lblCity;
     private javax.swing.JLabel lblComplement;
@@ -879,7 +909,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
     private javax.swing.JPanel pnlButtons;
     private javax.swing.JPanel pnlButtonsRegistration;
     private javax.swing.JPanel pnlFormStudent;
-    private javax.swing.JPanel pnlStudentRegistration;
+    private javax.swing.JPanel pnlStudentMonthly;
     private javax.swing.JTabbedPane tbdPnlStudent;
     private javax.swing.JTable tblStudents;
     private javax.swing.JFormattedTextField txtCep;

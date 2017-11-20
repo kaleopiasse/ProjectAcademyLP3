@@ -4,9 +4,14 @@
  * and open the template in the editor.
  */
 package modelDao;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,21 +27,33 @@ import modelConnection.ConnectionDB;
 public class MonthlyDao {
    
     ConnectionDB cntn = new ConnectionDB();
+    //LocalDate data;
+    //DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     
-    public void saveMonthly (MonthlyModel monthlyMod, StudentModel studentMod){
+    public void saveMonthly (MonthlyModel monthlyMod) throws ParseException{
         String studentCpf;
-        
+        int num = monthlyMod.getNumPortion();
+        int i = 1;
+        String data = monthlyMod.getDateRegistration();
         cntn.connection();
         try {
-            PreparedStatement pst = cntn.conn.prepareStatement("insert into monthly (id_monthly, cpf_student,date_registration,num_portion,date_portion,price,plan,) values (?,?,?,?,?,?,?)");
-            studentCpf = studentMod.getCpf();
-            pst.setInt(1, monthlyMod.getId_monthly());
-            pst.setString(2,studentCpf);
-            pst.setString(3, monthlyMod.getDateRegistration());
-            pst.setInt(4, monthlyMod.getNumPortion());
-            pst.setString(5, monthlyMod.getDatePortion());
-            pst.setDouble(6, monthlyMod.getPrice());
-            pst.setString(7, monthlyMod.getPlan());
+            while(i <= num){
+                PreparedStatement pst = cntn.conn.prepareStatement("insert into monthly (cpf_student,date_registration,modality1,modality2,num_portion,datePortion,price,plan) values (?,?,?,?,?,?,?,?)");
+                pst.setString(1, monthlyMod.getCpf_student());
+                //data = LocalDate.parse(monthlyMod.getDateRegistration(),formato);
+                //Date date = (Date) format.parse(data);
+                //java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+                //pst.setDate(2, sqlDate);
+                pst.setString(3, monthlyMod.getModality1());
+                pst.setString(4, monthlyMod.getModality2());
+                pst.setInt(5, monthlyMod.getNumPortion());
+                pst.setString(6, monthlyMod.getDatePortion());
+                pst.setDouble(7, monthlyMod.getPrice());
+                pst.setString(8, monthlyMod.getPlan());
+                pst.execute();
+                i++;
+            }
             JOptionPane.showMessageDialog(null,"Dados inseridos com sucesso !!!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Erro ao inserir os dados! \n" +ex);

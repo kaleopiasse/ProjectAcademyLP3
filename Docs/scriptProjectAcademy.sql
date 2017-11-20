@@ -42,11 +42,16 @@ primary key (cpf_student),
 foreign key (cpf_student) references person (cpf));
 
 create table monthly (
+id_monthly integer auto_increment,
 cpf_student varchar(11),
-date date,
+dateRegistration date,
+modality1 varchar(30),
+modaltiy2 varchar(30),
+numPortion integer,
+datePortion date,
 price decimal(10,2),
 plan varchar(50),
-primary key (cpf_student, date),
+primary key (id_monthly, cpf_student),
 foreign key (cpf_student) references student (cpf_student));
 
 create table person_email(
@@ -75,7 +80,7 @@ insert into student (cpf_student, situation)
 			  ("39958446858","Bloqueado"),
 			  ("39958446859","Inativo");
 
-insert into modality (name,price) values ("",0.00), ("Muay Thai",75.00), ("Kung Fu",75.00), ("Boxe",75.00), ("Musculação",65.00), ("MMA",95.00);
+insert into modality (name,price) values ("Nenhuma",0.00), ("Muay Thai",75.00), ("Kung Fu",75.00), ("Boxe",75.00), ("Musculação",65.00), ("MMA",95.00);
 
 //sites uteis
 // https://pt.icons8.com/icon/set/login/win8

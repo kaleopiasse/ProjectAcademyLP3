@@ -14,8 +14,8 @@ public class MonthlyModel {
     private int id_monthly;
     private String cpf_student;
     private String dateRegistration;
-    private ModalityModel modality1;
-    private ModalityModel modality2;
+    private String modality1;
+    private String modality2;
     private int numPortion;
     private String datePortion;
     private double price;
@@ -45,6 +45,23 @@ public class MonthlyModel {
         this.dateRegistration = date;
     }
 
+    public String getModality1() {
+        return modality1;
+    }
+
+    public void setModality1(String modality1) {
+        this.modality1 = modality1;
+    }
+
+    public String getModality2() {
+        return modality2;
+    }
+
+    public void setModality2(String modality2) {
+        this.modality2 = modality2;
+    }
+
+    
     public double getPrice() {
         return price;
     }

@@ -1,8 +1,6 @@
 package view;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.event.ItemEvent;
+
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -116,7 +114,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         lblRegistration = new javax.swing.JLabel();
         txtDateRegistration = new javax.swing.JFormattedTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblMonthlys = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Academia King Muay Thai");
@@ -447,7 +445,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         }
         txtDateRegistration.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblMonthlys.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -458,7 +456,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tblMonthlys);
 
         javax.swing.GroupLayout pnlStudentMonthlyLayout = new javax.swing.GroupLayout(pnlStudentMonthly);
         pnlStudentMonthly.setLayout(pnlStudentMonthlyLayout);
@@ -687,26 +685,33 @@ public class FormRegisterStudent extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxPlanActionPerformed
 
     private void btnSaveRegistrationMonthlyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveRegistrationMonthlyActionPerformed
-        if (flagButton2==1){
+        //if (flagButton2==1){
+            monthlyMod.setCpf_student(txtCpf.getText().replace(".","").replace("-",""));
             monthlyMod.setDateRegistration(txtDateRegistration.getText());
+            monthlyMod.setModality1((String)cbxModality.getSelectedItem());
+            monthlyMod.setModality2((String)cbxModality2.getSelectedItem());
+            if(((String)cbxPlan.getSelectedItem()).replace("\t","").equals("Mensal")){
+                monthlyMod.setNumPortion(1);
+            }
+            if(((String)cbxPlan.getSelectedItem()).replace("\t","").equals("Trimestral")){
+                monthlyMod.setNumPortion(3);
+            }
+            if(((String)cbxPlan.getSelectedItem()).replace("\t","").equals("Semestral")){
+                monthlyMod.setNumPortion(6);
+            }
+            if(((String)cbxPlan.getSelectedItem()).replace("\t","").equals("Anual")){
+                monthlyMod.setNumPortion(12);
+            }
             monthlyMod.setPlan((String)cbxPlan.getSelectedItem());
             monthlyMod.setPrice(Double.parseDouble(txtPrice.getText()));
-            //personMod.setEmail(txtEmail.getText());
-            personMod.setStreet(txtStreet.getText());
-            personMod.setDistrict(txtDistrict.getText());
-            personMod.setNum(Integer.parseInt(txtNumber.getText()));
-            personMod.setCep(txtCep.getText().replace("-",""));
-            personMod.setCity(txtCity.getText());
-            personMod.setState((String)cbxState.getSelectedItem());
-            personMod.setComplement(txtComplement.getText());
-            studentMod.setSituation((String)cbxSituation.getSelectedItem());
-            studentCon.saveStudent(personMod, studentMod);
+            monthlyMod.setDatePortion(txtValid.getText());
+            monthlyDao.saveMonthly(monthlyMod);
             clearText();
             btnCancel.setEnabled(true);
             btnDelete.setEnabled(true);
             btnUpdate.setEnabled(true);
-        }
-        else {
+        //}
+        /*else {
             personMod.setCpf(txtCpf.getText().replace(".","").replace("-",""));
             //personMod.setPhone(txtPhone.getText());
             personMod.setName(txtName.getText());
@@ -729,7 +734,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
             btnCancel.setEnabled(true);
             btnDelete.setEnabled(true);
             btnUpdate.setEnabled(true);
-        }
+        }*/
     }//GEN-LAST:event_btnSaveRegistrationMonthlyActionPerformed
 
     private void btnUpdateRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateRegistrationActionPerformed
@@ -886,7 +891,6 @@ public class FormRegisterStudent extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbxState;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblCep;
     private javax.swing.JLabel lblCity;
     private javax.swing.JLabel lblComplement;
@@ -911,6 +915,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
     private javax.swing.JPanel pnlFormStudent;
     private javax.swing.JPanel pnlStudentMonthly;
     private javax.swing.JTabbedPane tbdPnlStudent;
+    private javax.swing.JTable tblMonthlys;
     private javax.swing.JTable tblStudents;
     private javax.swing.JFormattedTextField txtCep;
     private javax.swing.JTextField txtCity;

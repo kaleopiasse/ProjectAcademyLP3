@@ -3,9 +3,12 @@ package view;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelBeans.ModalityModel;
@@ -453,9 +456,17 @@ public class FormRegisterStudent extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Numero Parcela", "Valor", "Data Vencimento"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(tblMonthlys);
 
         javax.swing.GroupLayout pnlStudentMonthlyLayout = new javax.swing.GroupLayout(pnlStudentMonthly);
@@ -555,6 +566,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
             btnDelete.setEnabled(true);
             btnUpdate.setEnabled(true);
             tbdPnlStudent.setEnabledAt(1, true);
+            fillTableMonthly();
         }
         else {
             personMod.setCpf(txtCpf.getText().replace(".","").replace("-",""));
@@ -580,6 +592,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
             btnDelete.setEnabled(true);
             btnUpdate.setEnabled(true);
             tbdPnlStudent.setEnabledAt(1, true);
+            fillTableMonthly();
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
@@ -605,6 +618,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
             btnUpdate.setEnabled(true);
             btnCreate.setEnabled(false);
             tbdPnlStudent.setEnabledAt(1, true);
+            fillTableMonthly();
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
@@ -633,6 +647,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         btnDelete.setEnabled(false);
         btnSearch.setEnabled(false);
         tbdPnlStudent.setEnabledAt(1, true);
+        fillTableMonthly();
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -705,7 +720,11 @@ public class FormRegisterStudent extends javax.swing.JFrame {
             monthlyMod.setPlan((String)cbxPlan.getSelectedItem());
             monthlyMod.setPrice(Double.parseDouble(txtPrice.getText()));
             monthlyMod.setDatePortion(txtValid.getText());
+        try {
             monthlyDao.saveMonthly(monthlyMod);
+        } catch (ParseException ex) {
+            Logger.getLogger(FormRegisterStudent.class.getName()).log(Level.SEVERE, null, ex);
+        }
             clearText();
             btnCancel.setEnabled(true);
             btnDelete.setEnabled(true);
@@ -783,6 +802,30 @@ public class FormRegisterStudent extends javax.swing.JFrame {
                 {
                     cntn.rs.getString("cpf"),
                     cntn.rs.getString("name"),
+                });   
+            }
+        } 
+        catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro "+ex.getMessage());
+        }
+        cntn.desconnection();
+    }
+    
+    public void fillTableMonthly (){
+        try {
+            cntn.connection();
+            cntn.executeSql("select *from monthly where cpf_student like'%"+studentMod.getSearch()+"%'");
+            DefaultTableModel tableModel = (DefaultTableModel) tblMonthlys.getModel();
+            
+            tableModel.setNumRows(0);
+            
+            while(cntn.rs.next()){
+                tableModel.addRow(new Object[]
+                {
+                    cntn.rs.getString("id_monthly"),
+                    cntn.rs.getString("numPortion"),
+                    cntn.rs.getString("price"),
+                    cntn.rs.getString("datePortion")
                 });   
             }
         } 

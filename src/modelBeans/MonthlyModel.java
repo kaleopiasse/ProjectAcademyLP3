@@ -5,6 +5,10 @@
  */
 package modelBeans;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 /**
  *
  * @author kaleo.piasse
@@ -94,4 +98,21 @@ public class MonthlyModel {
         this.datePortion = datePortion;
     }
     
+    public String parsedData(String data) throws ParseException{
+        
+        java.util.Date initDate = new SimpleDateFormat("dd/MM/yyyy").parse(data);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String parsedDate = formatter.format(initDate);
+        return parsedDate;
+    }
+    
+    public String addMonth (String data) throws ParseException {
+     
+        Calendar c = Calendar.getInstance();
+        java.util.Date initDate = new SimpleDateFormat("dd/MM/yyyy").parse(data);
+        c.setTime(initDate);
+        c.set(Calendar.MONTH, c.get(Calendar.MONTH)+1);
+        String addMonth = new SimpleDateFormat("dd/MM/yyyy").format(c.getTime());
+        return addMonth;    
+    }
 }

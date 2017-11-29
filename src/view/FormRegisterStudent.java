@@ -327,6 +327,7 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         pnlFormStudent.add(txtCity);
         txtCity.setBounds(450, 210, 210, 25);
 
+        tblStudents.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         tblStudents.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -448,12 +449,10 @@ public class FormRegisterStudent extends javax.swing.JFrame {
         }
         txtDateRegistration.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
 
+        tblMonthlys.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         tblMonthlys.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "ID", "Numero Parcela", "Valor", "Data Vencimento"

@@ -35,6 +35,7 @@ public class MainScreen extends javax.swing.JFrame {
         jmCadastros = new javax.swing.JMenu();
         jmiAluno = new javax.swing.JMenuItem();
         mnModality = new javax.swing.JMenuItem();
+        mnTeacher = new javax.swing.JMenuItem();
         jmEsc = new javax.swing.JMenu();
         jmiEsc = new javax.swing.JMenuItem();
 
@@ -63,6 +64,15 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         jmCadastros.add(mnModality);
+
+        mnTeacher.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        mnTeacher.setText("Professor");
+        mnTeacher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnTeacherActionPerformed(evt);
+            }
+        });
+        jmCadastros.add(mnTeacher);
 
         jMBar.add(jmCadastros);
 
@@ -113,6 +123,11 @@ public class MainScreen extends javax.swing.JFrame {
         register.setVisible(true);
     }//GEN-LAST:event_mnModalityActionPerformed
 
+    private void mnTeacherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTeacherActionPerformed
+        FormRegisterTeacher registerTeacher = new FormRegisterTeacher();
+        registerTeacher.setVisible(true);
+    }//GEN-LAST:event_mnTeacherActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -155,5 +170,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiAluno;
     private javax.swing.JMenuItem jmiEsc;
     private javax.swing.JMenuItem mnModality;
+    private javax.swing.JMenuItem mnTeacher;
     // End of variables declaration//GEN-END:variables
 }

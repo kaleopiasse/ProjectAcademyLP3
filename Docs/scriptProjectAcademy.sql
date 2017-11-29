@@ -17,7 +17,7 @@ primary key (cpf));
 
 create table product (
 id_product integer,
-name varchar(50),
+name_product varchar(50),
 description varchar (100),
 price float,
 primary key (id_product));

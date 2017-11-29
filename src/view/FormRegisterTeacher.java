@@ -365,7 +365,7 @@ public class FormRegisterTeacher extends javax.swing.JFrame{
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        /*if (flagButton==1){
+        if (flagButton==1){
             personMod.setCpf(txtCpf.getText().replace(".","").replace("-",""));
             //personMod.setPhone(txtPhone.getText());
             personMod.setName(txtName.getText());
@@ -412,7 +412,7 @@ public class FormRegisterTeacher extends javax.swing.JFrame{
             btnUpdate.setEnabled(true);
             tbdPnlStudent.setEnabledAt(1, true);
             fillTableMonthly();
-        }*/
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
